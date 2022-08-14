@@ -1,6 +1,7 @@
 <?php
 include_once(__DIR__.'/BaseController.php');
 include_once(__DIR__.'/../entities/User.php');
+include_once(__DIR__.'/../entities/Order.php');
 
 class AuthController extends BaseController
 {
@@ -12,19 +13,24 @@ class AuthController extends BaseController
 
     public function handle_login()
     {
-        echo "handle_login";
+        $order = new Order();
+        $order->set_amount(100.50);
+        $order->set_user(new User());
+        $arr = $order->attributes_to_array();
+        // $this->databaseService->create_record('user', $arr);
+        print_r($arr);
     }
 
     public function handle_register()
     {
         
-        $user = new User("10101");
+        $user = new User();
         $user->set_email("shakthisachintha@gmail.com");
         $user->set_name("Shakthi Sachintha");
         $user->set_address("15/5A, Maitipe, Galle");
-        $arr = $user->iterateAttributes();
-        // self::$databaseService->create_record('user', $arr);
-        print_r($arr);
+        $arr = $user->attributes_to_array();
+        $this->databaseService->create_record('user', $arr);
+        // print_r($arr);
     }
 
     public function handle_logout()

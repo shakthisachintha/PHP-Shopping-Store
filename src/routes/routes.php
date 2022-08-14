@@ -5,7 +5,7 @@ $routes = [
 
     // Auth routes
     ['url' => '/',                   'methods' => ['GET'],      'handler' => 'frontpage'],
-    ['url' => '/login',              'methods' => ['POST'],     'handler' => 'AuthController::handle_login'],
+    ['url' => '/login',              'methods' => ['GET'],     'handler' => 'AuthController::handle_login'],
     ['url' => '/register',           'methods' => ['GET'],      'handler' => 'AuthController::handle_register'],
     ['url' => '/logout',             'methods' => ['GET'],      'handler' => 'AuthController::handle_logout'],
 

@@ -7,7 +7,7 @@ class User extends BaseEntity
     protected string $name;
     protected string $address;
     protected UserType $type = UserType::Customer;
-    protected static string $tableName = 'user';
+    protected string $tableName = 'user';
 
     function __construct()
     {
@@ -52,6 +52,21 @@ class User extends BaseEntity
     function get_userType(): UserType
     {
         return $this->type;
+    }
+
+    function attributes_to_array(): array{
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'address' => $this->address,
+            'type' => $this->type->value
+        ];
+    }
+
+    function save_to_database(): bool {
+        
+        return true;
     }
 }
 

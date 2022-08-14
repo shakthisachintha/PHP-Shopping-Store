@@ -4,13 +4,13 @@ include_once(__DIR__ . '/BaseEntity.php');
 
 class Product extends BaseEntity
 {
-    private string $name;
-    private int $quantity;
-    private string $description;
-    private string $image;
-    private string $downloadLink;
-    private Category $category;
-    private static string $tableName = 'product';
+    protected string $name;
+    protected int $quantity;
+    protected string $description;
+    protected string $image;
+    protected string $download_link;
+    protected Category $category;
+    protected string $tableName = 'product';
 
     function __construct()
     {
@@ -39,7 +39,7 @@ class Product extends BaseEntity
 
     function set_downloadLink(string $downloadLink): void
     {
-        $this->downloadLink = $downloadLink;
+        $this->download_link = $downloadLink;
     }
 
     function set_category(Category $category): void
@@ -69,11 +69,23 @@ class Product extends BaseEntity
 
     function get_downloadLink(): string
     {
-        return $this->downloadLink;
+        return $this->download_link;
     }
 
     function get_category(): Category
     {
         return $this->category;
+    }
+
+    function attributes_to_array(): array{
+        return [
+            'id' => $this->id,
+            'quantity' => $this->quantity,
+            'description' => $this->description,
+            'image' => $this->image,
+            'download_link' => $this->download_link,
+            'category_id' => $this->category->id,
+            'name' => $this->name,
+        ];
     }
 }

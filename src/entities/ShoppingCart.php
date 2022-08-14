@@ -6,9 +6,9 @@ include_once(__DIR__ . '/BaseEntity.php');
 class ShoppingCart extends BaseEntity
 {
 
-    private User $user;
-    private array $products = array();
-    private static string $tableName = 'shoppingcart';
+    protected User $user;
+    protected array $products = array();
+    protected string $tableName = 'shoppingcart';
 
     function __construct()
     {
@@ -41,5 +41,22 @@ class ShoppingCart extends BaseEntity
         if ($pos !== false) {
             unset($this->products[$pos]);
         }
+    }
+
+    function attributes_to_array(): array{
+        return [
+            'id' => $this->id,
+            'user_id' => $this->user->id,
+        ];
+    }
+
+    protected function extended_store_db_func(): bool
+    {
+        foreach ($this->products as $product) {
+            $pd_arr = ["product_id"=>$product->id, "shoppingcart_id"=>$this->id];
+            $res = $this->databaseService->create_record("shoppingcart_product", $pd_arr);
+            if (!$res) return false;
+        }
+        return true;
     }
 }

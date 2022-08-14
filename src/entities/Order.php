@@ -5,13 +5,13 @@ include_once(__DIR__ . '/BaseEntity.php');
 
 class Order extends BaseEntity
 {
-    protected OrderStatus $status;
+    protected OrderStatus $status = OrderStatus::New;
     protected float $amount;
-    protected OrderType $type;
+    protected OrderType $type = OrderType::Online;
     protected User $user;
-    protected PaymentMethod $paymentMethod;
+    protected PaymentMethod $payment_method = PaymentMethod::Card;
     protected array $products = array();
-    protected static string $tableName = 'orders';
+    protected string $tableName = 'orders';
 
     function __construct()
     {
@@ -85,23 +85,45 @@ class Order extends BaseEntity
             unset($this->products[$pos]);
         }
     }
+
+    function attributes_to_array(): array
+    {
+        return [
+            'id' => $this->id,
+            'amount' => $this->amount,
+            'status' => $this->status->value,
+            'type' => $this->type->value,
+            'user_id' => $this->user->id,
+            'payment_method' => $this->payment_method->value,
+        ];
+    }
+
+    protected function extended_store_db_func(): bool
+    {
+        foreach ($this->products as $product) {
+            $pd_arr = ["product_id"=>$product->id, "order_id"=>$this->id];
+            $res = $this->databaseService->create_record("order_product", $pd_arr);
+            if (!$res) return false;
+        }
+        return true;
+    }
 }
 
-enum OrderStatus
+enum OrderStatus: string
 {
-    case New;
-    case Shipped;
-    case Completed;
+    case New = 'new';
+    case Shipped = 'shipped';
+    case Completed = 'completed';
 }
 
-enum OrderType
+enum OrderType: string
 {
-    case Online;
-    case Delivery;
+    case Online = 'online';
+    case Delivery = 'delivery';
 }
 
-enum PaymentMethod
+enum PaymentMethod: string
 {
-    case CashOnDelivery;
-    case Card;
+    case CashOnDelivery = 'cod';
+    case Card = 'card';
 }
