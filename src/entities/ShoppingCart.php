@@ -8,7 +8,7 @@ class ShoppingCart extends BaseEntity
 
     private User $user;
     private array $products = array();
-    private static string $tableName = 'shoppingCart';
+    private static string $tableName = 'shoppingcart';
 
     function __construct()
     {

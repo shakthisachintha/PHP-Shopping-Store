@@ -1,6 +1,7 @@
 <?php
 
-class BaseEntity {
+class BaseEntity
+{
     protected string $id;
 
     function __construct()
@@ -13,19 +14,19 @@ class BaseEntity {
         return $this->id;
     }
 
-    function iterateAttributes(): array {
+    function iterateAttributes(): array
+    {
         $attr_array = array();
-        foreach ($this as $attr=>$value) {
+        foreach ($this as $attr => $value) {
             $type = gettype($value);
-            if ($type === 'object'){
+            if ($type === 'object') {
                 $attr_array[$attr] = $value->value;
                 // echo "$attr: ".$value->value."<br>";
-            }else {
+            } else {
                 // echo "$attr: $value <br>";
                 $attr_array[$attr] = $value;
             }
         }
         return $attr_array;
-      }
-    
+    }
 }

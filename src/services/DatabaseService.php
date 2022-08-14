@@ -19,15 +19,14 @@ class DatabaseService
         $this->connection = $conn;
     }
 
-
     function create_record(string $table, array $data): bool
     {
         $columns = implode(", ", array_keys($data));
-        $escaped_values = array_map('mysql_real_escape_string', array_values($data));
+        $escaped_values = $data;
         foreach ($escaped_values as $idx => $data) $escaped_values[$idx] = "'" . $data . "'";
         $values  = implode(", ", $escaped_values);
         $query = "INSERT INTO $table ($columns) VALUES ($values)";
-        if ($this->conn->query($query) === TRUE) {
+        if ($this->connection->query($query) === TRUE) {
             return TRUE;
         } else {
             return FALSE;

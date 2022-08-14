@@ -11,7 +11,7 @@ class Order extends BaseEntity
     protected User $user;
     protected PaymentMethod $paymentMethod;
     protected array $products = array();
-    protected static string $tableName = 'order';
+    protected static string $tableName = 'orders';
 
     function __construct()
     {
