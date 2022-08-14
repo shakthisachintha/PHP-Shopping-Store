@@ -7,6 +7,12 @@ require_once(__DIR__ . '/../controllers/ShoppingCartController.php');
 
 $parsed_url = parse_url($_SERVER['REQUEST_URI']);
 $requested_path = $parsed_url['path'];
+$controller_registry = [
+    "AuthController" => new AuthController(),
+    "CategoryController" => new CategoryController(),
+    "ProductController" => new ProductController(),
+    "ShoppingCartController" => new ShoppingCartController(),
+];
 
 foreach ($routes as $route) {
 
@@ -44,15 +50,17 @@ foreach ($routes as $route) {
     if (isset($route['handler'])) {
 
         // Make sure the route handler is callable
-        if (!is_callable($route['handler'])) {
+        $handler_names = explode("::", $route['handler']);
+        
+        if (!method_exists($controller_registry[$handler_names[0]], $handler_names[1])) {
             $content = '<h1>500 Internal Server Error</h1>';
             $content .= '<p>Specified route-handler does not exist.</p>';
             $content .= '<pre>' . htmlspecialchars($route['handler']) . '</pre>';
             respond(500, $content);
         }
-
+        
         // If we got any matches
-        call_user_func($route['handler']);
+        call_user_func([$controller_registry[$handler_names[0]], $handler_names[1]]);
         return;
     } else {
         throw new Exception("Missing required parameter (handler) in route.");

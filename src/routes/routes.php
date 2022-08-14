@@ -6,7 +6,7 @@ $routes = [
     // Auth routes
     ['url' => '/',                   'methods' => ['GET'],      'handler' => 'frontpage'],
     ['url' => '/login',              'methods' => ['POST'],     'handler' => 'AuthController::handle_login'],
-    ['url' => '/register',           'methods' => ['POST'],     'handler' => 'AuthController::handle_register'],
+    ['url' => '/register',           'methods' => ['GET'],      'handler' => 'AuthController::handle_register'],
     ['url' => '/logout',             'methods' => ['GET'],      'handler' => 'AuthController::handle_logout'],
 
     // Product Routes
