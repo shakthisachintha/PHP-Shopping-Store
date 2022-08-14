@@ -1,13 +1,18 @@
 <?php
-include_once("./BaseEntity.php");
+include_once(__DIR__ . '/BaseEntity.php');
 
 class User extends BaseEntity
 {
-    private string $email;
-    private string $name;
-    private string $address;
-    private UserType $type;
+    protected string $email;
+    protected string $name;
+    protected string $address;
+    protected UserType $type = UserType::Customer;
+    protected static string $tableName = 'user';
 
+    function __construct()
+    {
+        parent::__construct();
+    }
 
     function set_name(string $name): void
     {
@@ -22,6 +27,11 @@ class User extends BaseEntity
     function set_address(string $address): void
     {
         $this->address = $address;
+    }
+
+    function set_user_type(UserType $userType): void
+    {
+        $this->type = $userType;
     }
 
     function get_email(): string
@@ -45,8 +55,8 @@ class User extends BaseEntity
     }
 }
 
-enum UserType
+enum UserType: string
 {
-    case Customer;
-    case Admin;
+    case Customer = 'customer';
+    case Admin = 'admin';
 }

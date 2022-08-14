@@ -2,15 +2,30 @@
 
 class BaseEntity {
     protected string $id;
-    protected string $tableName;
 
-    function set_id(string $id): void
+    function __construct()
     {
-        $this->id = $id;
+        $this->id = uniqid();
     }
 
     function get_id(): string
     {
         return $this->id;
     }
+
+    function iterateAttributes(): array {
+        $attr_array = array();
+        foreach ($this as $attr=>$value) {
+            $type = gettype($value);
+            if ($type === 'object'){
+                $attr_array[$attr] = $value->value;
+                // echo "$attr: ".$value->value."<br>";
+            }else {
+                // echo "$attr: $value <br>";
+                $attr_array[$attr] = $value;
+            }
+        }
+        return $attr_array;
+      }
+    
 }

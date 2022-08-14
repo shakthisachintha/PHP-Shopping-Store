@@ -4,8 +4,14 @@ include_once("./BaseEntity.php");
 
 class Category extends BaseEntity
 {
-    private string $name;
-    private array $products = array();
+    protected string $name;
+    protected array $products = array();
+    protected static string $tableName = 'category';
+
+    function __construct()
+    {
+        parent::__construct();
+    }
 
     function set_name(string $name): void
     {

@@ -1,14 +1,19 @@
 <?php
-include_once("./Product.php");
-include_once("./User.php");
-include_once("./BaseEntity.php");
+include_once(__DIR__ . '/Product.php');
+include_once(__DIR__ . '/User.php');
+include_once(__DIR__ . '/BaseEntity.php');
 
 class ShoppingCart extends BaseEntity
 {
 
     private User $user;
     private array $products = array();
+    private static string $tableName = 'shoppingCart';
 
+    function __construct()
+    {
+        parent::__construct();
+    }
 
     function set_user(User $user): void
     {

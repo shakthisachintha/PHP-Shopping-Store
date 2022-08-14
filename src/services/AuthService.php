@@ -16,8 +16,8 @@ class AuthService
     {
     }
 
-    function login(): void{
-        
+    function login(): void
+    {
     }
 
     function logout(): void

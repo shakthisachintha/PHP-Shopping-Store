@@ -3,7 +3,7 @@
 class FileSystemService
 {
 
-    function createFile(string fileName): bool
+    function createFile(): bool
     {
         return true;
     }

@@ -1,18 +1,33 @@
 <?php
-class AuthController
+include_once(__DIR__.'/BaseController.php');
+include_once(__DIR__.'/../entities/User.php');
+
+class AuthController extends BaseController
 {
 
-    public static function handle_login()
+    function __construct()
+    {
+        parent::__construct();
+    }
+
+    public function handle_login()
     {
         echo "handle_login";
     }
 
-    public static function handle_register()
+    public function handle_register()
     {
-        echo "handle_register";
+        
+        $user = new User("10101");
+        $user->set_email("shakthisachintha@gmail.com");
+        $user->set_name("Shakthi Sachintha");
+        $user->set_address("15/5A, Maitipe, Galle");
+        $arr = $user->iterateAttributes();
+        // self::$databaseService->create_record('user', $arr);
+        print_r($arr);
     }
 
-    public static function handle_logout()
+    public function handle_logout()
     {
         echo "handle_logout";
     }

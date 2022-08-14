@@ -1,16 +1,22 @@
 <?php
-include_once("./Product.php");
-include_once("./User.php");
-include_once("./BaseEntity.php");
+include_once(__DIR__ . '/Product.php');
+include_once(__DIR__ . '/User.php');
+include_once(__DIR__ . '/BaseEntity.php');
 
 class Order extends BaseEntity
 {
-    private OrderStatus $status;
-    private float $amount;
-    private OrderType $type;
-    private User $user;
-    private PaymentMethod $paymentMethod;
-    private array $products = array();
+    protected OrderStatus $status;
+    protected float $amount;
+    protected OrderType $type;
+    protected User $user;
+    protected PaymentMethod $paymentMethod;
+    protected array $products = array();
+    protected static string $tableName = 'order';
+
+    function __construct()
+    {
+        parent::__construct();
+    }
 
     function set_status(OrderStatus $status): void
     {

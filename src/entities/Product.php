@@ -1,6 +1,6 @@
 <?php
-include_once("./Category.php");
-include_once("./BaseEntity.php");
+include_once(__DIR__ . '/Category.php');
+include_once(__DIR__ . '/BaseEntity.php');
 
 class Product extends BaseEntity
 {
@@ -10,6 +10,12 @@ class Product extends BaseEntity
     private string $image;
     private string $downloadLink;
     private Category $category;
+    private static string $tableName = 'product';
+
+    function __construct()
+    {
+        parent::__construct();
+    }
 
     function set_name(string $name): void
     {
@@ -65,7 +71,7 @@ class Product extends BaseEntity
     {
         return $this->downloadLink;
     }
-    
+
     function get_category(): Category
     {
         return $this->category;
