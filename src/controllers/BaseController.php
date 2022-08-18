@@ -15,6 +15,8 @@ class BaseController
 
     function render($template, $param = array()){
         extract($param, EXTR_SKIP);
-        include($template);
+        include(__DIR__."/../views/html_header.php");
+        include(__DIR__."/../$template.php");
+        include(__DIR__."/../views/html_footer.php");
     }
 }

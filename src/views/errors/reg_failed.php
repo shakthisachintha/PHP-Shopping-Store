@@ -1,0 +1,1 @@
+<h2>Registration failed</h2>

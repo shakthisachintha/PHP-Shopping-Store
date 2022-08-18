@@ -11,6 +11,14 @@ class AuthController extends BaseController
         parent::__construct();
     }
 
+    public function show_index(){
+        $this->render('views/pages/html_index');
+    }
+
+    public function show_login_register(){
+        $this->render('views/pages/html_login_register');
+    }
+
     public function handle_login(array $request)
     {
         $order = new Order();

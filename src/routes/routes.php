@@ -4,8 +4,9 @@ $routes = [
     // ['/route-name', [GET, POST], controller::handler_function]
 
     // Auth routes
-    ['url' => '/',                   'methods' => ['GET'],      'handler' => 'frontpage'],
-    ['url' => '/login',              'methods' => ['GET'],     'handler' => 'AuthController::handle_login'],
+    ['url' => '/',                   'methods' => ['GET'],      'handler' => 'AuthController::show_index'],
+    ['url' => '/auth',               'methods' => ['GET'],      'handler' => 'AuthController::show_login_register'],
+    ['url' => '/login',              'methods' => ['GET'],      'handler' => 'AuthController::handle_login'],
     ['url' => '/register',           'methods' => ['GET'],      'handler' => 'AuthController::handle_register'],
     ['url' => '/logout',             'methods' => ['GET'],      'handler' => 'AuthController::handle_logout'],
 
