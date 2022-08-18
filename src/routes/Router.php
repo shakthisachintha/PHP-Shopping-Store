@@ -20,12 +20,6 @@ foreach ($routes as $route) {
     // Note.. A POST request can also contain GET parameters
     //        since they are included in the URL
     //        We therefor verrify both parameter types.
-    if (isset($route['get_parms'])) {
-        handle_parameters($route['get_parms'], $_GET);
-    }
-    if (isset($route['post_parms'])) {
-        handle_parameters($route['post_parms'], $_POST);
-    }
 
     // Check if the route is recognized
     if (isset($route['url'])) {
@@ -51,16 +45,16 @@ foreach ($routes as $route) {
 
         // Make sure the route handler is callable
         $handler_names = explode("::", $route['handler']);
-        
+
         if (!method_exists($controller_registry[$handler_names[0]], $handler_names[1])) {
             $content = '<h1>500 Internal Server Error</h1>';
             $content .= '<p>Specified route-handler does not exist.</p>';
             $content .= '<pre>' . htmlspecialchars($route['handler']) . '</pre>';
             respond(500, $content);
         }
-        
-        // If we got any matches
-        call_user_func([$controller_registry[$handler_names[0]], $handler_names[1]]);
+
+        $input_params = sanitize_inputs();
+        call_user_func([$controller_registry[$handler_names[0]], $handler_names[1]], $input_params);
         return;
     } else {
         throw new Exception("Missing required parameter (handler) in route.");
@@ -81,6 +75,24 @@ function respond($code, $html, $headers = [])
     }
     echo $html;
     exit();
+}
+
+function sanitize_inputs(): array
+{
+    $request_data = array();
+    if ($_SERVER["REQUEST_METHOD"] === "GET") {
+        $request_data = $_GET;
+    }
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $request_data = $_POST;
+    }
+    $param_array = array();
+    foreach ($request_data as $param_name => $param_value) {
+        $param = strip_tags($param_value);
+        $param = htmlspecialchars($param);
+        $param_array[$param_name] = filter_var($param, FILTER_SANITIZE_SPECIAL_CHARS);
+    }
+    return $param_array;
 }
 
 function handle_parameters($allowed_parameters, $post_or_get_parameters)

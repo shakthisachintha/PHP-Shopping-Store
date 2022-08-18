@@ -64,6 +64,23 @@ class User extends BaseEntity
         ];
     }
 
+    public static function createNew(array $properties): User{
+        $user = new User();
+        $user->set_name($properties['name']);
+        $user->set_email($properties['email']);
+        $user->set_address($properties['address']);
+        $user->set_user_type($properties['type']);
+        return $user;
+    }
+
+    public static function register_new_user(User $user, string $password): bool{
+        $hashed_pw = password_hash($password, PASSWORD_BCRYPT);
+        if ($user->save_to_database()){
+            return $user->databaseService->update_record('user',['password'=>$hashed_pw], $user->get_id());
+        }
+        return false;
+    }
+
     function save_to_database(): bool {
         
         return true;

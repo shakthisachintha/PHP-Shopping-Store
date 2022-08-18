@@ -47,8 +47,13 @@ class DatabaseService
 
 
 
-    function update(): bool
+    function update_record(string $table, array $data, string $id): bool
     {
+        $query = "UPDATE $table SET ";
+        foreach ($data as $column => $value){
+            $query .= ",$column = $value";
+        }
+        $query.="WHERE id = $id";
         return true;
     }
 

@@ -5,15 +5,11 @@ class AuthService
 {
     function is_logged(): bool
     {
-        if (isset($_SESSION['errors'])) {
+        if (isset($_SESSION['user'])) {
             return true;
         } else {
             return false;
         }
-    }
-
-    function register(): void
-    {
     }
 
     function login(): void
