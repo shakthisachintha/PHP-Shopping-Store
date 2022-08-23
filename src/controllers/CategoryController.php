@@ -1,5 +1,5 @@
 <?php
-class CategoryController
+class CategoryController extends BaseController
 {
     public static function show_create_view()
     {

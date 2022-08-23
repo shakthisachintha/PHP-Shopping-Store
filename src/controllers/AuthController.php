@@ -12,11 +12,11 @@ class AuthController extends BaseController
     }
 
     public function show_index(){
-        $this->render('views/pages/html_index');
+        $this->render('views/pages/html_index', ["title"=>"Home"]);
     }
 
     public function show_login_register(){
-        $this->render('views/pages/html_login_register');
+        $this->render('views/pages/html_login_register', ["title"=>"Login | Register"]);
     }
 
     public function handle_login(array $request)
