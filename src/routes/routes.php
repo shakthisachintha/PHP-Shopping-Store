@@ -7,8 +7,9 @@ $routes = [
     ['url' => '/',                   'methods' => ['GET'],      'handler' => 'AuthController::show_index'],
     ['url' => '/auth',               'methods' => ['GET'],      'handler' => 'AuthController::show_login_register'],
     ['url' => '/login',              'methods' => ['GET'],      'handler' => 'AuthController::handle_login'],
-    ['url' => '/register',           'methods' => ['GET'],      'handler' => 'AuthController::handle_register'],
+    ['url' => '/register',           'methods' => ['POST'],     'handler' => 'AuthController::handle_register'],
     ['url' => '/logout',             'methods' => ['GET'],      'handler' => 'AuthController::handle_logout'],
+    ['url' => '/forgot-password',    'methods' => ['GET'],      'handler' => 'AuthController::handle_forgot_password'],
 
     // Product Routes
     ['url' => '/product-create',     'methods' => ['GET'],      'handler' => 'ProductController::show_create_view'],
@@ -36,4 +37,5 @@ $routes = [
     // Order Routes
 
     // User Routes
+    ['url' => '/user-account',        'methods' => ['GET'],     'handler' => 'UserController::show_user_account'],
 ];

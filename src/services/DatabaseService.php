@@ -1,10 +1,10 @@
 <?php
 class DatabaseService
 {
-    private $servername = "localhost";
-    private $username = "root";
-    private $password = "enactor";
-    private $database = "papers_store";
+    private $servername = DATABASE_SERVER;
+    private $username = DATABASE_USER_NAME;
+    private $password = DATABASE_PASSWORD;
+    private $database = DATABASE_NAME;
     private $connection;
 
     function __construct()

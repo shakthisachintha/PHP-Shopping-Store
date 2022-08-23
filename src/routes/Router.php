@@ -118,3 +118,7 @@ function handle_parameters($allowed_parameters, $post_or_get_parameters)
 
     return true;
 }
+
+function build_route(string $url): string {
+    return BASE_URL.":".PORT_NUMBER."/$url";
+}
