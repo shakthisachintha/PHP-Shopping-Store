@@ -1,6 +1,7 @@
 <?php
 // Website Configurations
-define("PORT_NUMBER", "8080");
+define("PORT_NUMBER", "8082");
+define("HOST", "localhost");
 define("BASE_URL", "http://localhost");
 
 
