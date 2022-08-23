@@ -1,34 +1,41 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand ps-5 fs-1" href="#">C B A</a>
+    <div class="container">
+        <a class="navbar-brand ps-5 fs-1" href="#">Past Paper Shop</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav pe-5 fs-5">
-                <li class="nav-item pe-3">
+                <li class="nav-item pl-3">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
-                <li class="nav-item pe-3">
-                    <a class="nav-link" href="#">About Us</a>
+                <li class="nav-item pl-3">
+                    <a class="nav-link" href="#">Shop</a>
                 </li>
-                <li class="nav-item pe-3">
-                    <a class="nav-link" href="#">Contact</a>
+                <li class="nav-item pl-3">
+                    <a class="nav-link" href="#">Grades</a>
                 </li>
-                <li class="nav-item pe-3">
-                    <a class="nav-link">Projects</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-circle"></i>
+                <li class="nav-item pl-3 dropdown">
+                    <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="text-info bi bi-cart"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item disabled" href="#">Cart is empty!</a></li>
+                        <!-- <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-in-right"></i> Login/Register</a></li> -->
+                    </ul>
+                </li>
+
+                <li class="nav-item pl-3 dropdown">
+                    <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="text-light bi bi-person-circle"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="<?=build_route("auth")?>"><i class="bi bi-box-arrow-in-right"></i> Login/Register</a></li>
+                        <li><a class="dropdown-item" href="<?=build_route("user-account")?>"><i class="bi bi-person-lines-fill"></i> Account</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="<?=build_route("logout")?>"><i class="bi bi-box-arrow-left"></i> Logout</a></li>
                     </ul>
                 </li>
             </ul>

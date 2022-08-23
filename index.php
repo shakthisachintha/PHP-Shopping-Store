@@ -1,3 +1,4 @@
 <?php
-require_once('./src/routes/Router.php')
+require_once(__DIR__.'/src/config.php');
+require_once(__DIR__.'/src/routes/Router.php')
 ?>
