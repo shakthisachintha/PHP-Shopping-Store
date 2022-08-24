@@ -3,6 +3,7 @@
 define("PORT_NUMBER", "8082");
 define("HOST", "localhost");
 define("BASE_URL", "http://localhost");
+define("SITE_NAME", "Past Papers Store");
 
 
 // Database Configuration
