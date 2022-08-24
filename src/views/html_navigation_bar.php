@@ -1,13 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand ps-5 fs-1" href="#">Past Paper Shop</a>
+        <a class="navbar-brand ps-5 fs-1" href="#"><?=SITE_NAME?></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav pe-5 fs-5">
                 <li class="nav-item pl-3">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="<?=build_route("")?>">Home</a>
                 </li>
                 <li class="nav-item pl-3">
                     <a class="nav-link" href="#">Shop</a>
