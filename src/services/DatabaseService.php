@@ -36,7 +36,7 @@ class DatabaseService
     function retrieve_by_id(string $table, string $id): array
     {
         $query  = "SELECT * FROM $table WHERE id=$id";
-        $result = $this->conn->query($query);
+        $result = $this->connection->query($query);
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             return $row;
@@ -45,26 +45,49 @@ class DatabaseService
         }
     }
 
+    function retrieve_by_field(string $table, string $field, string $value): array
+    {
+        $query = "SELECT * FROM $table WHERE $field='$value'";
+        $result = $this->connection->query($query);
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row;
+        } else {
+            return array();
+        }
+    }
+
+    function record_exists(string $table, string $id): bool
+    {
+        $query  = "SELECT * FROM $table WHERE id=$id";
+        $result = $this->connection->query($query);
+        if ($result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 
     function update_record(string $table, array $data, string $id): bool
     {
         $query = "UPDATE $table SET ";
-        foreach ($data as $column => $value){
-            $query .= ",$column = $value";
+        foreach ($data as $column => $value) {
+            $query .= "$column = '$value'";
         }
-        $query.="WHERE id = $id";
-        return true;
+        $query .= " WHERE id = '$id'";
+        return $this->connection->query($query);
     }
 
     function delete_by_id(string $table, string $id): bool
     {
         $query = "DELETE FROM $table WHERE id=$id";
 
-        if ($this->conn->query($query) === TRUE) {
-            return TRUE;
+        if ($this->connection->query($query) === TRUE) {
+            return true;
         } else {
-            return FALSE;
+            return false;
         }
     }
 }
