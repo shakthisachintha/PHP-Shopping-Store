@@ -1,4 +1,5 @@
 <?php
+include_once(__DIR__ . "/../entities/User.php");
 session_start();
 
 class AuthService
@@ -12,12 +13,16 @@ class AuthService
         }
     }
 
-    function login(): void
+    function login(User $user): void
     {
+        $_SESSION['user'] = $user;
+        RouterService::Redirect(build_route(''));
+        return;
     }
 
     function logout(): void
     {
         unset($_SESSION["user"]);
+        RouterService::Redirect(build_route(''));
     }
 }

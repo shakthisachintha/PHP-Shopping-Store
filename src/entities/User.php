@@ -54,7 +54,8 @@ class User extends BaseEntity
         return $this->type;
     }
 
-    function attributes_to_array(): array{
+    function attributes_to_array(): array
+    {
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -62,28 +63,6 @@ class User extends BaseEntity
             'address' => $this->address,
             'type' => $this->type->value
         ];
-    }
-
-    public static function createNew(array $properties): User{
-        $user = new User();
-        $user->set_name($properties['name']);
-        $user->set_email($properties['email']);
-        $user->set_address($properties['address']);
-        $user->set_user_type($properties['type']);
-        return $user;
-    }
-
-    public static function register_new_user(User $user, string $password): bool{
-        $hashed_pw = password_hash($password, PASSWORD_BCRYPT);
-        if ($user->save_to_database()){
-            return $user->databaseService->update_record('user',['password'=>$hashed_pw], $user->get_id());
-        }
-        return false;
-    }
-
-    function save_to_database(): bool {
-        
-        return true;
     }
 }
 

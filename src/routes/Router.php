@@ -90,7 +90,8 @@ function sanitize_inputs(): array
     foreach ($request_data as $param_name => $param_value) {
         $param = strip_tags($param_value);
         $param = htmlspecialchars($param);
-        $param_array[$param_name] = filter_var($param, FILTER_SANITIZE_SPECIAL_CHARS);
+        // $param_array[$param_name] = filter_var($param, FILTER_SANITIZE_SPECIAL_CHARS);
+        $param_array[$param_name] = $param;
     }
     return $param_array;
 }
