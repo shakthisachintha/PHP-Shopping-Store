@@ -1,21 +1,21 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand ps-5 fs-1" href="<?= build_route("") ?>"><?= SITE_NAME ?></a>
+        <a class="navbar-brand fs-3" href="<?= build_route("") ?>"><?= SITE_NAME ?></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav pe-5 fs-5">
-                <li class="nav-item pl-3">
+            <ul class="navbar-nav">
+                <li class="nav-item ps-3">
                     <a class="nav-link active" aria-current="page" href="<?= build_route("") ?>">Home</a>
                 </li>
-                <li class="nav-item pl-3">
+                <li class="nav-item ps-3">
                     <a class="nav-link" href="#">Shop</a>
                 </li>
-                <li class="nav-item pl-3">
+                <li class="nav-item ps-3">
                     <a class="nav-link" href="#">Grades</a>
                 </li>
-                <li class="nav-item pl-3 dropdown">
+                <li class="nav-item ps-3 dropdown">
                     <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="text-info bi bi-cart"></i>
                     </a>
@@ -25,7 +25,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item pl-3 dropdown">
+                <li class="nav-item ps-3 dropdown">
                     <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="text-light bi bi-person-circle"></i>
                     </a>

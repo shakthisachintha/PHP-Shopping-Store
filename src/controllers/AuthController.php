@@ -26,19 +26,12 @@ class AuthController extends BaseController
 
     public function handle_login(array $request)
     {
-        print_r($request);
-        $user = $this->UserService->get_user_by_email($request['email']);
-        $this->AuthService->login($user);
+        $this->AuthService->login($request['email'], $request['password']);
     }
 
     public function handle_register(array $request)
     {
-        $request['type'] = UserType::Customer;
-        $user = $this->UserService->create_new($request);
-        if ($this->UserService->register_new_user($user, $request['password']))
-            $this->AuthService->login($user);
-        else
-            echo $this->render('views/errors/reg_failed');
+        $this->AuthService->register_new_user($request);
     }
 
     public function handle_logout()

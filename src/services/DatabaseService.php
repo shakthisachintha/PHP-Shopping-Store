@@ -35,7 +35,7 @@ class DatabaseService
 
     function retrieve_by_id(string $table, string $id): array
     {
-        $query  = "SELECT * FROM $table WHERE id=$id";
+        $query  = "SELECT * FROM $table WHERE id='$id'";
         $result = $this->connection->query($query);
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
@@ -59,7 +59,7 @@ class DatabaseService
 
     function record_exists(string $table, string $id): bool
     {
-        $query  = "SELECT * FROM $table WHERE id=$id";
+        $query  = "SELECT * FROM $table WHERE id='$id'";
         $result = $this->connection->query($query);
         if ($result->num_rows > 0) {
             return true;
