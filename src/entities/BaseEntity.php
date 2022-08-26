@@ -14,4 +14,8 @@ class BaseEntity
     {
         return $this->id;
     }
+
+    function set_id(string $id): void {
+        $this->id = $id;
+    }
 }

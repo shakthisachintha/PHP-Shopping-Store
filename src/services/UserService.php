@@ -17,7 +17,18 @@ class UserService extends EntityService
         $user->set_email($properties['email']);
         $user->set_address($properties['address']);
         $user->set_user_type($properties['type']);
+        $user->set_id($properties['id']);
         return $user;
+    }
+
+    private function create_user_from_record(array $user_arr): User | NULL
+    {
+        if (!$user_arr) return NULL;
+        else {
+            $user_arr['type'] = $user_arr['type'] === 'admin' ? UserType::Admin : UserType::Customer;
+            $user = $this->create_new($user_arr);
+            return $user;
+        }
     }
 
     public function register_new_user(User $user, string $password): bool
@@ -32,11 +43,19 @@ class UserService extends EntityService
     public function get_user_by_email(string $email): User | NULL
     {
         $user_arr = $this->databaseService->retrieve_by_field($this->table_name, 'email', $email);
-        if (!$user_arr) return NULL;
-        else {
-            $user_arr['type'] = $user_arr['type'] === 'admin' ? UserType::Admin : UserType::Customer;
-            $user = $this->create_new($user_arr);
-            return $user;
-        }
+        return $this->create_user_from_record($user_arr);
+    }
+
+    public function get_user_by_id(string $id): User | NULL
+    {
+        $user_arr = $this->databaseService->retrieve_by_id($this->table_name, $id);
+        return $this->create_user_from_record($user_arr);
+    }
+
+    public function verify_user_password(string $password, string $user_id): bool
+    {
+        $user_arr = $this->databaseService->retrieve_by_id($this->table_name, $user_id);
+        if (!$user_arr) return false;
+        else return password_verify($password, $user_arr['password']);
     }
 }
