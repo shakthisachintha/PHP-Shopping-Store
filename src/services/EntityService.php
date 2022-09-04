@@ -1,5 +1,17 @@
 <?php
 
+class EntityOperationResult
+{
+    public bool $success;
+    public string $details;
+
+    public function __construct(bool $success, string $details)
+    {
+        $this->success = $success;
+        $this->details = $details;        
+    }
+}
+
 class EntityService
 {
     protected DatabaseService $databaseService;

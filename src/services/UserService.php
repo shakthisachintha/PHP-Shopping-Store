@@ -17,7 +17,7 @@ class UserService extends EntityService
         $user->set_email($properties['email']);
         $user->set_address($properties['address']);
         $user->set_user_type($properties['type']);
-        $user->set_id($properties['id']);
+        if (isset($properties['id'])) $user->set_id($properties['id']);
         return $user;
     }
 

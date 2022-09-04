@@ -57,6 +57,19 @@ class DatabaseService
         }
     }
 
+    function retrieve_all_records(string $table): array
+    {
+        $results_array = array();
+        $query = "SELECT * FROM $table";
+        $result = $this->connection->query($query);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                array_push($results_array, $row);
+            }
+        }
+        return $results_array;
+    }
+
     function record_exists(string $table, string $id): bool
     {
         $query  = "SELECT * FROM $table WHERE id='$id'";
@@ -68,7 +81,16 @@ class DatabaseService
         }
     }
 
-
+    function record_exists_by_field(string $table, string $field, string $data): bool
+    {
+        $query  = "SELECT * FROM $table WHERE $field='$data'";
+        $result = $this->connection->query($query);
+        if ($result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     function update_record(string $table, array $data, string $id): bool
     {
