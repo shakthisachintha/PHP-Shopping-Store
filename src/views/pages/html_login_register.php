@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="row mt-5">
-        <div class="col-lg-6 pr-5">
+        <div class="col-lg-6 pe-5">
             <h3>Register</h3>
             <form class="mt-4" action="<?= build_route("register") ?>" method="POST">
                 <div class="mb-3">
@@ -35,7 +35,7 @@
                 <button type="submit" class="mt-3 btn btn-outline-dark">Register</button>
             </form>
         </div>
-        <div class="col-lg-6 border-left pl-5">
+        <div class="col-lg-6 border-start ps-5">
             <h3>Login</h3>
             <form class="mt-4" action="<?= build_route("login") ?>" method="POST">
                 <div class="mb-3">

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand fs-3" href="<?= build_route("") ?>"><?= SITE_NAME ?></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,9 +17,19 @@
                 </li>
                 <li class="nav-item ps-3 dropdown">
                     <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin
+                    </a>
+                    <ul class="dropdown-menu mt-3">
+                        <li><a class="dropdown-item" href="<?= build_route("products") ?>">Products</a></li>
+                        <li><a class="dropdown-item" href="<?= build_route("category-create") ?>">Categories</a></li>
+                        <li><a class="dropdown-item" href="#">Orders</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item ps-3 dropdown">
+                    <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="text-info bi bi-cart"></i>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu mt-3">
                         <li><a class="dropdown-item disabled" href="#">Cart is empty!</a></li>
                         <!-- <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-in-right"></i> Login/Register</a></li> -->
                     </ul>
@@ -29,7 +39,7 @@
                     <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="text-light bi bi-person-circle"></i>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown-menu-end mt-3">
 
                         <?php if ($authService->is_logged()) : ?>
                             <li><a class="dropdown-item" href="<?= build_route("user-account") ?>"><i class="bi bi-person-lines-fill"></i> Account</a></li>
