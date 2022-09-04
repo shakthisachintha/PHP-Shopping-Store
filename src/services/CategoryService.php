@@ -44,7 +44,7 @@ class CategoryService extends EntityService
         if ($this->save_to_database($category)) {
             return new EntityOperationResult(true, "Category '" . $category->get_name() . "' successfully created!");
         }
-        return new EntityService(false, "Category creation failed!");
+        return new EntityOperationResult(false, "Category creation failed!");
     }
 
     public function get_all(): array

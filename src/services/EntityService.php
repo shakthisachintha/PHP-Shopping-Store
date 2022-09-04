@@ -21,7 +21,7 @@ class EntityService
         $this->databaseService = new DatabaseService();
     }
 
-    protected function extended_store_db_func(): bool
+    protected function extended_store_db_func(object $entity): bool
     {
         return true;
     }
@@ -30,7 +30,7 @@ class EntityService
     {
         $data_arr = $entity->attributes_to_array();
         $res1 = $this->databaseService->create_record($this->table_name, $data_arr);
-        $res2 = $this->extended_store_db_func();
+        $res2 = $this->extended_store_db_func($entity);
         return ($res1 && $res2);
     }
 }
