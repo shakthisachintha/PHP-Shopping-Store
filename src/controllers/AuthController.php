@@ -1,17 +1,14 @@
 <?php
 include_once(__DIR__ . '/BaseController.php');
-// include_once(__DIR__ . '/../entities/User.php');
 include_once(__DIR__ . '/../services/UserService.php');
 include_once(__DIR__ . '/../entities/Order.php');
 
 class AuthController extends BaseController
 {
-    private UserService $UserService;
 
     function __construct()
     {
         parent::__construct();
-        $this->UserService = new UserService();
     }
 
     public function show_index()
