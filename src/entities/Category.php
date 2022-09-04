@@ -1,6 +1,6 @@
 <?php
-include_once(__DIR__. '/Product.php');
-include_once(__DIR__. '/BaseEntity.php');
+include_once(__DIR__ . '/Product.php');
+include_once(__DIR__ . '/BaseEntity.php');
 
 class Category extends BaseEntity
 {
@@ -41,7 +41,8 @@ class Category extends BaseEntity
         }
     }
 
-    function attributes_to_array(): array{
+    function attributes_to_array(): array
+    {
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -51,7 +52,7 @@ class Category extends BaseEntity
     protected function extended_store_db_func(): bool
     {
         foreach ($this->products as $product) {
-            $pd_arr = ["product_id"=>$product->id, "category_id"=>$this->id];
+            $pd_arr = ["product_id" => $product->id, "category_id" => $this->id];
             $res = $this->databaseService->create_record("category_product", $pd_arr);
             if (!$res) return false;
         }
