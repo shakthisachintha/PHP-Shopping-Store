@@ -1,9 +1,9 @@
 <?php
 class CategoryController extends BaseController
 {
-    public static function show_create_view()
+    public function show_create_view()
     {
-        echo 'category - show_create_view';
+        $this->render('views/pages/category/html_category_create', ["title" => "Category Create"]);
     }
     public static function show_category_view()
     {
@@ -17,9 +17,11 @@ class CategoryController extends BaseController
     {
         echo 'category - show_delete_view';
     }
-    public static function handle_create()
+    public function handle_create(array $request)
     {
-        echo 'category - handle_create';
+        $resp = $this->CategoryService->create_new_category_from_request($request);
+        if ($resp->success) return RouterService::RedirectBackWithSuccess($resp->details);
+        else return RouterService::RedirectBackWithErrors([$resp->details]);
     }
     public static function handle_update()
     {
