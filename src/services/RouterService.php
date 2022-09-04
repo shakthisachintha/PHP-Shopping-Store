@@ -18,6 +18,12 @@ class RouterService
         RouterService::Redirect($url, $permanent);
     }
 
+    public static function RedirectBackWithSuccess(string $message){
+        $_SESSION['success'] = true;
+        $_SESSION['success_message'] = $message;
+        RouterService::RedirectBack();
+    }
+
     public static function RedirectBackWithErrors(array $errors)
     {
         $_SESSION['error'] = true;

@@ -12,6 +12,7 @@ $routes = [
     ['url' => '/forgot-password',    'methods' => ['GET'],      'handler' => 'AuthController::handle_forgot_password'],
 
     // Product Routes
+    ['url' => '/products',           'methods' => ['GET'],      'handler' => 'ProductController::show_index'],
     ['url' => '/product-create',     'methods' => ['GET'],      'handler' => 'ProductController::show_create_view'],
     ['url' => '/product-view',       'methods' => ['GET'],      'handler' => 'ProductController::show_product_view'],
     ['url' => '/product-update',     'methods' => ['GET'],      'handler' => 'ProductController::show_update_view'],
@@ -25,7 +26,7 @@ $routes = [
     ['url' => '/category-view',      'methods' => ['GET'],      'handler' => 'CategoryController::show_category_view'],
     ['url' => '/category-update',    'methods' => ['GET'],      'handler' => 'CategoryController::show_update_view'],
     ['url' => '/category-delete',    'methods' => ['GET'],      'handler' => 'CategoryController::show_delete_view'],
-    ['url' => '/category-create',    'methods' => ['POST'],     'handler' => 'CategoryController::handle_create'],
+    ['url' => '/category-save',      'methods' => ['POST'],     'handler' => 'CategoryController::handle_create'],
     ['url' => '/category-update',    'methods' => ['POST'],     'handler' => 'CategoryController::handle_update'],
     ['url' => '/category-delete',    'methods' => ['POST'],     'handler' => 'CategoryController::handle_delete'],
 
