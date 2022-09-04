@@ -9,7 +9,7 @@
     <div class="row mt-5">
         <div class="col-lg-6">
             <h3>Enter Product Details</h3>
-            <form class="mt-4" action="<?= build_route("proudct-create") ?>" method="POST">
+            <form class="mt-4" action="<?= build_route("product-save") ?>" method="POST">
                 <div class="mb-4">
                     <label for="productName" class="form-label">Name <span class="text-danger">*</span></label>
                     <input type="text" name="name" required minlength="5" class="form-control" id="productName">
@@ -24,11 +24,15 @@
                 </div>
                 <div class="mb-4">
                     <label for="productImage" class="form-label">Image URL <span class="text-danger">*</span></label>
-                    <input type="text" name="image" required min="10" class="form-control" id="productImage">
+                    <input type="text" name="image_url" required min="10" class="form-control" id="productImage">
+                </div>
+                <div class="mb-4">
+                    <label for="productImage" class="form-label">Download Link <span class="text-danger">*</span></label>
+                    <input type="text" name="download_link" required min="10" class="form-control" id="productImage">
                 </div>
                 <div class="mb-4">
                     <label for="productCategory" class="form-label">Product Category <span class="text-danger">*</span></label>
-                    <select id="productCategory" name="category" class="form-select">
+                    <select id="productCategory" name="category_id" class="form-select">
                         <?php if ((isset($categories) && count($categories) >= 0)) : ?>
                             <?php foreach ($categories as $category) : ?>
                                 <option value="<?= $category->get_id() ?>"><?= $category->get_name() ?></option>

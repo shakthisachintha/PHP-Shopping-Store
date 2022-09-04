@@ -17,7 +17,7 @@ $routes = [
     ['url' => '/product-view',       'methods' => ['GET'],      'handler' => 'ProductController::show_product_view'],
     ['url' => '/product-update',     'methods' => ['GET'],      'handler' => 'ProductController::show_update_view'],
     ['url' => '/product-delete',     'methods' => ['GET'],      'handler' => 'ProductController::show_delete_view'],
-    ['url' => '/product-create',     'methods' => ['POST'],     'handler' => 'ProductController::handle_create'],
+    ['url' => '/product-save',       'methods' => ['POST'],     'handler' => 'ProductController::handle_create'],
     ['url' => '/product-update',     'methods' => ['POST'],     'handler' => 'ProductController::handle_update'],
     ['url' => '/product-delete',     'methods' => ['POST'],     'handler' => 'ProductController::handle_delete'],
 

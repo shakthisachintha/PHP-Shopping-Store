@@ -7,7 +7,7 @@ class Product extends BaseEntity
     protected string $name;
     protected int $quantity;
     protected string $description;
-    protected string $image;
+    protected string $image_url;
     protected string $download_link;
     protected Category $category;
     protected string $tableName = 'product';
@@ -34,7 +34,7 @@ class Product extends BaseEntity
 
     function set_image(string $image): void
     {
-        $this->image = $image;
+        $this->image_url = $image;
     }
 
     function set_downloadLink(string $downloadLink): void
@@ -64,7 +64,7 @@ class Product extends BaseEntity
 
     function get_image(): string
     {
-        return $this->image;
+        return $this->image_url;
     }
 
     function get_downloadLink(): string
@@ -82,7 +82,7 @@ class Product extends BaseEntity
             'id' => $this->id,
             'quantity' => $this->quantity,
             'description' => $this->description,
-            'image' => $this->image,
+            'image_url' => $this->image_url,
             'download_link' => $this->download_link,
             'category_id' => $this->category->id,
             'name' => $this->name,
