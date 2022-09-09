@@ -18,11 +18,9 @@
         </div>
     </div>
 
-    <div class="row pt-5 g-5">
-
+    <div class="row gy-5 pt-5">
         <?php if ((isset($products) && count($products) >= 0)) : ?>
             <?php foreach ($products as $index => $product) : ?>
-
                 <div class="col">
                     <div class="card <?= $index % 3 === 0 ? "me-auto" : "" ?> <?= $index % 3 === 1 ? "mx-auto" : "" ?> <?= $index % 3 === 2 ? "ms-auto" : "" ?> border-0 shadow" style="width: 20rem;">
                         <img src="<?= $product->get_image() ?>" class="card-img-top" alt="...">
@@ -41,8 +39,5 @@
         <?php else : ?>
             <p class="text-muted">No products found...</p>
         <?php endif; ?>
-
-
-
     </div>
 </div>

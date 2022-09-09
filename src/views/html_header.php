@@ -14,6 +14,10 @@
     body {
       font-family: 'M PLUS Rounded 1c', sans-serif;
     }
+
+    td {
+      vertical-align: middle;
+    }
   </style>
 </head>
 
