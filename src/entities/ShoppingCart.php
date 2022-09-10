@@ -6,28 +6,35 @@ include_once(__DIR__ . '/BaseEntity.php');
 class ShoppingCart extends BaseEntity
 {
 
-    protected User $user;
+    protected string $user_id;
     protected array $products = array();
-    protected string $tableName = 'shoppingcart';
 
     function __construct()
     {
         parent::__construct();
     }
 
-    function set_user(User $user): void
+    function set_user_id(string $user_id): void
     {
-        $this->user = $user;
+        $this->user_id = $user_id;
     }
 
-    function add_products(Product $product): void
+    function add_products(Product $product, string $rec_id): void
     {
-        array_push($this->products, $product);
+        array_push($this->products, ['record_id'=>$rec_id, 'product'=>$product]);
     }
 
-    function get_user(): User
+    function contains_product(string $product_id): bool
     {
-        return $this->user;
+        foreach ($this->products as $data) {
+            if ($data['product']->get_id() === $product_id) return true;
+        }
+        return false;
+    }
+
+    function get_user_id(): string
+    {
+        return $this->user_id;
     }
 
     function get_products(): array
@@ -35,28 +42,10 @@ class ShoppingCart extends BaseEntity
         return $this->products;
     }
 
-    function deleteProduct(Product $product): void
-    {
-        $pos = array_search($product, $this->products);
-        if ($pos !== false) {
-            unset($this->products[$pos]);
-        }
-    }
-
     function attributes_to_array(): array{
         return [
             'id' => $this->id,
-            'user_id' => $this->user->id,
+            'user_id' => $this->user_id,
         ];
-    }
-
-    protected function extended_store_db_func(): bool
-    {
-        foreach ($this->products as $product) {
-            $pd_arr = ["product_id"=>$product->id, "shoppingcart_id"=>$this->id];
-            $res = $this->databaseService->create_record("shoppingcart_product", $pd_arr);
-            if (!$res) return false;
-        }
-        return true;
     }
 }

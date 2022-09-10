@@ -34,34 +34,34 @@
                     <a type="button" class="nav-link position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="text-info bi bi-cart"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge badge-sm rounded-pill bg-danger">
-                            3
+                            <?= count($shoppingCart->get_products()) ?>
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end p-2 mt-3" style="width:23rem !important">
-                        <!-- <li><a class="dropdown-item text-center disabled" href="#">Cart is empty!</a></li> -->
-                        <li>
-                            <table style="font-size:small;table-layout:auto !important" class="table w-100 fw-bold">
-                                <tr>
-                                    <td><img style="width:3rem" src="https://i0.wp.com/lol.lk/wp-content/uploads/2021/11/19.jpg?fit=1576%2C1576&ssl=1" alt="..."></td>
-                                    <td>Grade 11 OL Past Papers</td>
-                                    <td>LKR 1000</td>
-                                    <td><a href="#" class="text-danger text-decoration-none"><i class="bi bi-x-circle"></i></a></td>
-                                </tr>
-
-                                <tr>
-                                    <td><img style="width:3rem" src="https://i0.wp.com/lol.lk/wp-content/uploads/2021/11/19.jpg?fit=1576%2C1576&ssl=1" alt="..."></td>
-                                    <td>Grade 11 OL Past Papers</td>
-                                    <td>LKR 1000</td>
-                                    <td><a href="#" class="text-danger text-decoration-none"><i class="bi bi-x-circle"></i></a></td>
-                                </tr>
-                            </table>
-                        </li>
-                        <li>
-                            <a class="btn btn-outline-dark w-100 btn-sm" href="">Checkout <i class="bi bi-cart-check"></i></a>
-                        </li>
-                        <li>
-                            <a class="mt-2 btn btn-outline-secondary w-100 btn-sm" href="">Clear cart <i class="bi bi-box-arrow-in-right"></i></a>
-                        </li>
+                        <?php if (count($shoppingCart->get_products()) > 0) : ?>
+                            <li>
+                                <table style="font-size:small;table-layout:auto !important" class="table w-100 fw-bold">
+                                    <?php foreach ($shoppingCart->get_products() as $data) : ?>
+                                        <tr>
+                                            <td><img style="width:3rem" src="<?= $data['product']->get_image() ?>" alt="..."></td>
+                                            <td><?= $data['product']->get_name() ?></td>
+                                            <td>LKR <?= $data['product']->get_price() ?></td>
+                                            <td><a href="<?= build_route_get('cart-remove-product', ['product_id' => $data['product']->get_id()]) ?>" class="text-danger text-decoration-none"><i class="bi bi-x-circle"></i></a></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </table>
+                            </li>
+                        <?php else : ?>
+                            <li><a class="dropdown-item text-center disabled" href="#">Cart is empty!</a></li>
+                        <?php endif; ?>
+                        <?php if (count($shoppingCart->get_products()) > 0) : ?>
+                            <li>
+                                <a class="btn btn-outline-dark w-100 btn-sm" href="">Checkout <i class="bi bi-cart-check"></i></a>
+                            </li>
+                            <li>
+                                <a class="mt-2 btn btn-outline-secondary w-100 btn-sm" href="<?= build_route("cart-clear") ?>">Clear cart <i class="bi bi-box-arrow-in-right"></i></a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </li>
 

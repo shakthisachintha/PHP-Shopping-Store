@@ -5,11 +5,12 @@
             <p>All active products are listed here.</p>
         </div>
 
-        <!-- if admin -->
-        <div class="col align-items-center d-flex">
-            <a class="btn ms-auto btn-outline-dark" href="<?= build_route("product-create") ?>">Create new + </i></a>
-        </div>
-        <!-- end if admin -->
+        <?php if ($authService->is_admin()) : ?>
+            <div class="col align-items-center d-flex">
+                <a class="btn ms-auto btn-outline-dark" href="<?= build_route("product-create") ?>">Create new + </i></a>
+            </div>
+        <?php endif; ?>
+
     </div>
 
     <div class="row">
@@ -28,9 +29,22 @@
                             <h5 class="card-title"><?= $product->get_name() ?></h5>
                             <p class="card-text"><?= $product->get_description() ?></p>
                             <div class="row justify-content-between">
-                                <div class="col-7"> <a href="#" class="btn btn-sm btn-outline-dark">Add to cart <i class="bi bi-bag-plus"></i></a></div>
-                                <div class="col-7"> <a href="#" class="btn btn-sm btn-outline-success">Added to cart <i class="bi bi-bag-check-fill"></i></a></div>
-                                <div class="col-4"><a href="#" class="btn btn-sm btn-outline-danger">Edit <i class="bi bi-pencil-square"></i></a></div>
+                                <?php if ($shoppingCart->contains_product($product->get_id())) : ?>
+                                    <div class="col-7"><a href="<?= build_route_get('cart-remove-product', ['product_id' => $product->get_id()]) ?>" class="btn btn-sm btn-outline-secondary">Remove from cart <i class="bi bi-bag-dash-fill"></i></a></div>
+                                <?php else : ?>
+                                    <div class="col-7">
+                                        <?php if (!$authService->is_logged()) : ?>
+                                            <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Please login first!">
+                                                <button class="btn btn-sm btn-outline-dark" type="button" disabled>Add to cart <i class="bi bi-bag-plus"></i></button>
+                                            </span>
+                                        <?php else : ?>
+                                            <a href="<?= build_route_get('cart-add-product', ['product_id' => $product->get_id()]) ?>" class="btn btn-sm btn-outline-dark">Add to cart <i class="bi bi-bag-plus"></i></a>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if ($authService->is_admin()) : ?>
+                                    <div class="col-4"><a href="#" class="btn btn-sm btn-outline-danger">Edit <i class="bi bi-pencil-square"></i></a></div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -41,3 +55,12 @@
         <?php endif; ?>
     </div>
 </div>
+
+<?php if (!$authService->is_logged()) : ?>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+<?php endif; ?>
