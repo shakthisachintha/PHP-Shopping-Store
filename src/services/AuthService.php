@@ -20,6 +20,20 @@ class AuthService
         }
     }
 
+    function is_admin(): bool
+    {
+        if ($this->is_logged() && $_SESSION['user']->get_userType() === UserType::Admin) {
+            return true;
+        }
+        return false;
+    }
+
+    function get_current_user(): User | NULL
+    {
+        if (isset($_SESSION['user'])) return $_SESSION['user'];
+        return NULL;
+    }
+
     function login(string $email, string $password): void
     {
         $user = $this->userService->get_user_by_email($email);

@@ -9,6 +9,7 @@ class Product extends BaseEntity
     protected string $description;
     protected string $image_url;
     protected string $download_link;
+    protected float $price;
     protected Category $category;
     protected string $tableName = 'product';
 
@@ -47,6 +48,11 @@ class Product extends BaseEntity
         $this->category = $category;
     }
 
+    function set_price(float $price): void
+    {
+        $this->price = $price;
+    }
+
     function get_name(): string
     {
         return $this->name;
@@ -77,7 +83,13 @@ class Product extends BaseEntity
         return $this->category;
     }
 
-    function attributes_to_array(): array{
+    function get_price(): float
+    {
+        return $this->price;
+    }
+
+    function attributes_to_array(): array
+    {
         return [
             'id' => $this->id,
             'quantity' => $this->quantity,
@@ -86,6 +98,7 @@ class Product extends BaseEntity
             'download_link' => $this->download_link,
             'category_id' => $this->category->id,
             'name' => $this->name,
+            'price' => $this->price
         ];
     }
 }

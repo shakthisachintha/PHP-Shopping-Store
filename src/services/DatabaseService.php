@@ -104,12 +104,29 @@ class DatabaseService
 
     function delete_by_id(string $table, string $id): bool
     {
-        $query = "DELETE FROM $table WHERE id=$id";
-
+        $query = "DELETE FROM $table WHERE id='$id'";
         if ($this->connection->query($query) === TRUE) {
             return true;
         } else {
             return false;
         }
+    }
+
+    function get_filtered_records(string $table, array $data, string $operator = 'AND'): array
+    {
+        $query_str = "SELECT * FROM $table WHERE ";
+        foreach ($data as $key => $value) {
+            $query_str .= "$key = '$value' $operator ";
+        }
+        $query_str = substr($query_str, 0, -1 * (strlen($operator) + 2)) . ";";
+
+        $results_array = array();
+        $result = $this->connection->query($query_str);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                array_push($results_array, $row);
+            }
+        }
+        return $results_array;
     }
 }

@@ -22,6 +22,7 @@ class ProductService extends EntityService
         $product->set_description($properties['description']);
         $product->set_image($properties['image_url']);
         $product->set_downloadLink($properties['download_link']);
+        $product->set_price($properties['price']);
         $product->set_category($category);
 
         if (isset($properties['id'])) $product->set_id($properties['id']);
