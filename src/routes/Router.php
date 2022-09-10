@@ -150,10 +150,11 @@ function execute_middlewares(array $middlewares, array $input_params)
         'auth' => 'checkAuth',
         'admin' => 'checkAdmin'
     ];
-
+    
     foreach ($middlewares as $middleware) {
-        $result = call_user_func($func_mapping[$middleware], [$input_params]);
+        $result = call_user_func($func_mapping[$middleware], $input_params);
     }
+    return $result;
 }
 
 function checkGuest(array $request): bool | array
@@ -181,7 +182,6 @@ function checkAdmin(array $request_arr): bool | array
 {
     if ($request = checkAuth($request_arr)) {
         if ($request['user']->get_userType() === UserType::Admin) {
-            $request['isAdmin'] = true;
             return $request;
         }
     }
