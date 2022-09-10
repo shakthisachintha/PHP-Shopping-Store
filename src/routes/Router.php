@@ -54,6 +54,11 @@ foreach ($routes as $route) {
         }
 
         $input_params = sanitize_inputs();
+
+        if (isset($route['middlewares'])) {
+            $input_params = execute_middlewares($route['middlewares'], $input_params);
+        }
+
         call_user_func([$controller_registry[$handler_names[0]], $handler_names[1]], $input_params);
         return;
     } else {
@@ -120,6 +125,66 @@ function handle_parameters($allowed_parameters, $post_or_get_parameters)
     return true;
 }
 
-function build_route(string $url): string {
-    return BASE_URL.":".PORT_NUMBER."/$url";
+function build_route(string $url): string
+{
+    return BASE_URL . ":" . PORT_NUMBER . "/$url";
+}
+
+function build_route_get(string $url, array $data_arr): string
+{
+    $query_str = "";
+    foreach ($data_arr as $param_name => $data) {
+        $query_str .= "$param_name=$data&";
+    }
+    if (count($data_arr) == 1) {
+        $query_str = substr($query_str, 0, -1);
+    }
+    $route_url = BASE_URL . ":" . PORT_NUMBER . "/$url?$query_str";
+    return $route_url;
+}
+
+function execute_middlewares(array $middlewares, array $input_params)
+{
+    $func_mapping = [
+        'guest' => 'checkGuest',
+        'auth' => 'checkAuth',
+        'admin' => 'checkAdmin'
+    ];
+
+    foreach ($middlewares as $middleware) {
+        $result = call_user_func($func_mapping[$middleware], [$input_params]);
+    }
+}
+
+function checkGuest(array $request): bool | array
+{
+    if (isset($_SESSION['user'])) {
+        RouterService::RedirectWithErrors(build_route(''), ["Your are already logged in!"]);
+        return false;
+    } else {
+        return $request;
+    }
+}
+
+function checkAuth(array $request): bool | array
+{
+    if (isset($_SESSION['user'])) {
+        $request['user'] = $_SESSION['user'];
+        return $request;
+    } else {
+        RouterService::RedirectWithErrors(build_route('login'), ["Please login first!"]);
+        return false;
+    }
+}
+
+function checkAdmin(array $request_arr): bool | array
+{
+    if ($request = checkAuth($request_arr)) {
+        if ($request['user']->get_userType() === UserType::Admin) {
+            $request['isAdmin'] = true;
+            return $request;
+        }
+    }
+    RouterService::RedirectWithErrors(build_route(''), ["You are not authorised!"]);
+    return false;
 }
