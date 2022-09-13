@@ -5,6 +5,7 @@ include_once(__DIR__ . '/../services/RouterService.php');
 include_once(__DIR__ . '/../services/CategoryService.php');
 include_once(__DIR__ . '/../services/ProductService.php');
 include_once(__DIR__ . '/../services/ShoppingCartService.php');
+include_once(__DIR__ . '/../services/OrderService.php');
 
 class BaseController
 {
@@ -13,6 +14,7 @@ class BaseController
     protected CategoryService $CategoryService;
     protected ProductService $ProductService;
     protected ShoppingCartService $ShoppingCartService;
+    protected OrderService $OrderService;
 
     function __construct()
     {
@@ -21,6 +23,7 @@ class BaseController
         $this->CategoryService = new CategoryService();
         $this->ProductService = new ProductService();
         $this->ShoppingCartService = new ShoppingCartService();
+        $this->OrderService = new OrderService();
     }
 
     function render($template, $param = array())

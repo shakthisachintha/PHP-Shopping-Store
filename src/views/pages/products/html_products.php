@@ -10,7 +10,6 @@
                 <a class="btn ms-auto btn-outline-dark" href="<?= build_route("product-create") ?>">Create new + </i></a>
             </div>
         <?php endif; ?>
-
     </div>
 
     <div class="row">
@@ -28,6 +27,7 @@
                         <div class="card-body">
                             <h5 class="card-title"><?= $product->get_name() ?></h5>
                             <p class="card-text"><?= $product->get_description() ?></p>
+                            <p class="card-text fw-bold">LKR <?= $product->get_price() ?></p>
                             <div class="row justify-content-between">
                                 <?php if ($shoppingCart->contains_product($product->get_id())) : ?>
                                     <div class="col-7"><a href="<?= build_route_get('cart-remove-product', ['product_id' => $product->get_id()]) ?>" class="btn btn-sm btn-outline-secondary">Remove from cart <i class="bi bi-bag-dash-fill"></i></a></div>

@@ -56,7 +56,7 @@
                         <?php endif; ?>
                         <?php if (count($shoppingCart->get_products()) > 0) : ?>
                             <li>
-                                <a class="btn btn-outline-dark w-100 btn-sm" href="">Checkout <i class="bi bi-cart-check"></i></a>
+                                <a class="btn btn-outline-dark w-100 btn-sm" href="<?= build_route("checkout") ?>">Checkout <i class="bi bi-cart-check"></i></a>
                             </li>
                             <li>
                                 <a class="mt-2 btn btn-outline-secondary w-100 btn-sm" href="<?= build_route("cart-clear") ?>">Clear cart <i class="bi bi-box-arrow-in-right"></i></a>

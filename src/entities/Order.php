@@ -38,6 +38,10 @@ class Order extends BaseEntity
         $this->user = $user;
     }
 
+    function set_products(array $products): void {
+        $this->products = $products;
+    }
+
     function set_payment_method(PaymentMethod $payment_method): void
     {
         $this->paymentMethod = $payment_method;

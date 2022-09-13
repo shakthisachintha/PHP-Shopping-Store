@@ -31,12 +31,13 @@ $routes = [
     ['url' => '/category-delete',    'methods' => ['POST'],     'middlewares'=>['admin'],   'handler' => 'CategoryController::handle_delete'],
 
     // Shopping Cart Routes
-    ['url' => '/cart-view',           'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'ShoppingCartController::show_cart_view'],
     ['url' => '/cart-add-product',    'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'ShoppingCartController::handle_add_product'],
     ['url' => '/cart-remove-product', 'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'ShoppingCartController::handle_remove_product'],
     ['url' => '/cart-clear',          'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'ShoppingCartController::handle_cart_clear'],
 
     // Order Routes
+    ['url' => '/checkout',            'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'OrderController::show_checkout_page'],
+    ['url' => '/checkout-payment',    'methods' => ['POST'],     'middlewares'=>['auth'],   'handler' => 'OrderController::handle_checkout_payment'],
 
     // User Routes
     ['url' => '/user-account',        'methods' => ['GET'],     'handler' => 'UserController::show_user_account'],
