@@ -25,7 +25,7 @@ class DatabaseService
         $escaped_values = $data;
         foreach ($escaped_values as $idx => $data) $escaped_values[$idx] = "'" . $data . "'";
         $values  = implode(", ", $escaped_values);
-        $query = "INSERT INTO $table ($columns) VALUES ($values)";
+        $query = "INSERT INTO $table ($columns) VALUES ($values);";
         if ($this->connection->query($query) === TRUE) {
             return TRUE;
         } else {
