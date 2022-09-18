@@ -48,14 +48,4 @@ class Category extends BaseEntity
             'name' => $this->name,
         ];
     }
-
-    protected function extended_store_db_func(): bool
-    {
-        foreach ($this->products as $product) {
-            $pd_arr = ["product_id" => $product->id, "category_id" => $this->id];
-            $res = $this->databaseService->create_record("category_product", $pd_arr);
-            if (!$res) return false;
-        }
-        return true;
-    }
 }

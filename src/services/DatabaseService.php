@@ -47,14 +47,15 @@ class DatabaseService
 
     function retrieve_by_field(string $table, string $field, string $value): array
     {
+        $results_array = array();
         $query = "SELECT * FROM $table WHERE $field='$value'";
         $result = $this->connection->query($query);
         if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            return $row;
-        } else {
-            return array();
+            while ($row = $result->fetch_assoc()) {
+                array_push($results_array, $row);
+            }
         }
+        return $results_array;
     }
 
     function retrieve_all_records(string $table): array

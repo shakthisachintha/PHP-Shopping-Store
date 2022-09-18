@@ -43,7 +43,7 @@ class UserService extends EntityService
     public function get_user_by_email(string $email): User | NULL
     {
         $user_arr = $this->databaseService->retrieve_by_field($this->table_name, 'email', $email);
-        return $this->create_user_from_record($user_arr);
+        return $this->create_user_from_record($user_arr[0]);
     }
 
     public function get_user_by_id(string $id): User | NULL
