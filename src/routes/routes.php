@@ -37,7 +37,11 @@ $routes = [
 
     // Order Routes
     ['url' => '/checkout',            'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'OrderController::show_checkout_page'],
-    ['url' => '/checkout-payment',    'methods' => ['POST'],     'middlewares'=>['auth'],   'handler' => 'OrderController::handle_checkout_payment'],
+    ['url' => '/checkout-order',      'methods' => ['POST'],    'middlewares'=>['auth'],   'handler' => 'OrderController::handle_create_order_and_checkout'],
+    ['url' => '/checkout-payment',    'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'OrderController::show_checkout_payment_gateway'],
+    ['url' => '/payment-status',      'methods' => ['POST'],    'middlewares'=>['auth'],   'handler' => 'OrderController::handle_payment_status_update'],
+    ['url' => '/orders',              'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'OrderController::show_order_details'],
+    ['url' => '/order-download',      'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'OrderController::handle_order_product_download'],
 
     // User Routes
     ['url' => '/user-account',        'methods' => ['GET'],     'handler' => 'UserController::show_user_account'],

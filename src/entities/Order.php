@@ -12,6 +12,7 @@ class Order extends BaseEntity
     protected PaymentMethod $payment_method = PaymentMethod::Card;
     protected array $products = array();
     protected string $tableName = 'orders';
+    protected PaymentStatus $payment_status = PaymentStatus::Incomplete;
 
     function __construct()
     {
@@ -44,7 +45,11 @@ class Order extends BaseEntity
 
     function set_payment_method(PaymentMethod $payment_method): void
     {
-        $this->paymentMethod = $payment_method;
+        $this->payment_method = $payment_method;
+    }
+
+    function set_payment_status(PaymentStatus $payment_status): void{
+        $this->payment_status = $payment_status;
     }
 
     function get_status(): OrderStatus
@@ -69,7 +74,11 @@ class Order extends BaseEntity
 
     function get_payment_method(): PaymentMethod
     {
-        return $this->paymentMethod;
+        return $this->payment_method;
+    }
+
+    function get_payment_status(): PaymentStatus {
+        return $this->payment_status;
     }
 
     function add_products(Product $product): void
@@ -99,17 +108,8 @@ class Order extends BaseEntity
             'type' => $this->type->value,
             'user_id' => $this->user->id,
             'payment_method' => $this->payment_method->value,
+            'payment_status' => $this->payment_status->value,
         ];
-    }
-
-    protected function extended_store_db_func(): bool
-    {
-        foreach ($this->products as $product) {
-            $pd_arr = ["product_id"=>$product->id, "order_id"=>$this->id];
-            $res = $this->databaseService->create_record("order_product", $pd_arr);
-            if (!$res) return false;
-        }
-        return true;
     }
 }
 
@@ -130,4 +130,9 @@ enum PaymentMethod: string
 {
     case CashOnDelivery = 'cod';
     case Card = 'card';
+}
+
+enum PaymentStatus: string {
+    case Complete = 'complete';
+    case Incomplete = 'incomplete'; 
 }

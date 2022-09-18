@@ -19,14 +19,17 @@ class OrderService extends EntityService
     {
         $order = new Order();
         $status = $properties['status'] === "new" ? OrderStatus::New : ($properties['status'] === "completed" ? OrderStatus::Completed : OrderStatus::Shipped);
+        $order_type = $properties['type'] === 'online' ? OrderType::Online : OrderType::Delivery;
+        $payment_method = $properties['payment_method'] === 'card' ? PaymentMethod::Card : PaymentMethod::CashOnDelivery;
+        $payment_status = $properties['payment_status'] === 'complete' ? PaymentStatus::Complete : PaymentStatus::Incomplete;
+
         $order->set_status($status);
         $order->set_amount($properties['amount']);
-        $order_type = $properties['order_type'] === 'online' ? OrderType::Online : OrderType::Delivery;
         $order->set_type($order_type);
         $order->set_user($properties['user']);
-        $payment_method = $properties['payment_type'] === 'card' ? PaymentMethod::Card : PaymentMethod::CashOnDelivery;
         $order->set_payment_method($payment_method);
         $order->set_products($properties['products']);
+        $order->set_payment_status($payment_status);
         if (isset($properties['id'])) $order->set_id($properties['id']);
         return $order;
     }
@@ -49,9 +52,9 @@ class OrderService extends EntityService
     private function get_order_products_array(string $id): array
     {
         $products_array = array();
-        $product_ids = $this->databaseService->retrieve_by_field('order_product', 'order_id', $id);
-        foreach ($product_ids as $product_id) {
-            $product = $this->productService->get_product_by_id($product_id);
+        $order_products = $this->databaseService->retrieve_by_field('order_product', 'order_id', $id);
+        foreach ($order_products as $order_product) {
+            $product = $this->productService->get_product_by_id($order_product['product_id']);
             array_push($products_array, $product);
         }
         return $products_array;
@@ -63,7 +66,7 @@ class OrderService extends EntityService
         return $this->create_order_from_record($order_arr);
     }
 
-    public function new_order_from_customer_cart(string $customer_id, array $request): bool
+    public function new_order_from_customer_cart(string $customer_id, array $request): Order | NULL
     {
         $cart = $this->shoppingCartService->get_customer_shopping_cart($customer_id);
         $products_array = array();
@@ -80,12 +83,21 @@ class OrderService extends EntityService
             "products" => $products_array,
             "amount" => $amount,
             "status" => $order_status,
-            "order_type" => $order_type,
-            "payment_type" => $order_pay_type,
-            "user" => $order_user
+            "type" => $order_type,
+            "payment_method" => $order_pay_type,
+            "user" => $order_user,
+            "payment_status" => PaymentStatus::Incomplete
         ];
         $order = $this->create_new($order_properties);
-        return $this->save_to_database($order);
+        if ($this->save_to_database($order)) return $order;
+        else return NULL;
+    }
+
+    public function update_payment_status(string $order_id, string $payment_status)
+    {
+        $success = $this->databaseService->update_record($this->table_name, ['payment_status' => $payment_status], $order_id);
+        if ($success) return new EntityOperationResult(TRUE, "");
+        else return new EntityOperationResult(FALSE, "");
     }
 
     protected function extended_store_db_func(object $order): bool

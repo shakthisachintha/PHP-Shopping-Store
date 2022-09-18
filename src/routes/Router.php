@@ -175,7 +175,7 @@ function checkAuth(array $request): bool | array
         $request['user'] = $_SESSION['user'];
         return $request;
     } else {
-        RouterService::RedirectWithErrors(build_route('login'), ["Please login first!"]);
+        RouterService::RedirectWithErrors(build_route('auth'), ["Please login first!"]);
         return false;
     }
 }

@@ -43,11 +43,11 @@
             <?php endif; ?>
 
             <?php if (count($shoppingCart->get_products()) > 0) : ?>
-                <form class="mt-4" action="<?= build_route("checkout-payment") ?>" method="POST">
+                <form class="mt-4" action="<?= build_route("checkout-order") ?>" method="POST">
                     <div class="mb-4">
                         <label for="orderType" class="form-label">Select delivery method <span class="text-danger">*</span></label>
-                        <select id="orderType" name="order_type" class="form-select">
-                            <option value="online">Online Download</option>
+                        <select id="orderType" name="type" class="form-select">
+                            <option selected value="online">Online Download</option>
                             <option value="delivery">Deliver by Post</option>
                         </select>
                     </div>
