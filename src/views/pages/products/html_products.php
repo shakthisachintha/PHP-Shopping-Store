@@ -43,7 +43,7 @@
                                     </div>
                                 <?php endif; ?>
                                 <?php if ($authService->is_admin()) : ?>
-                                    <div class="col-4"><a href="#" class="btn btn-sm btn-outline-danger">Edit <i class="bi bi-pencil-square"></i></a></div>
+                                    <div class="col-4"><a href="<?=build_route_get("product-view", ['product_id' => $product->get_id()])?>" class="btn btn-sm btn-outline-danger">Edit <i class="bi bi-pencil-square"></i></a></div>
                                 <?php endif; ?>
                             </div>
                         </div>

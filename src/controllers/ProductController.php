@@ -24,5 +24,20 @@ class ProductController extends BaseController
         if ($resp->success) return RouterService::RedirectBackWithSuccess($resp->details);
         else return RouterService::RedirectBackWithErrors([$resp->details]);
     }
-    
+
+    public function show_product_view(array $request){
+        $cat_arr = $this->CategoryService->get_all();
+        $product = $this->ProductService->get_product_by_id($request["product_id"]);
+        $this->render('views/pages/products/html_product_update', ["title" => "Product Details", "categories"=>$cat_arr, "product"=>$product]);
+    }
+
+    public function handle_product_update(array $request){
+        $resp = $this->ProductService->update_product($request);
+        if ($resp->success) return RouterService::RedirectBackWithSuccess($resp->details);
+        else return RouterService::RedirectBackWithErrors([$resp->details]);
+    }
+ 
+    public function handle_product_delete(array $request){
+        echo "prodcut delete feature will be implemented in the next iteration.";
+    }
 }

@@ -19,6 +19,10 @@
                     <input type="text" name="description" required minlength="10" class="form-control" id="productDescription">
                 </div>
                 <div class="mb-4">
+                    <label for="productPrice" class="form-label">Price (LKR) <span class="text-danger">*</span></label>
+                    <input type="text" name="price" required min="200" class="form-control" id="productPrice">
+                </div>
+                <div class="mb-4">
                     <label for="productQuantity" class="form-label">Stock Quantity <span class="text-danger">*</span></label>
                     <input type="number" name="quantity" required min="1" value="5" class="form-control" id="productQuantity">
                 </div>
@@ -52,6 +56,7 @@
                 <div class="card-body">
                     <h5 id="productPreviewName" class="card-title">Grade 10 History Past Papers</h5>
                     <p id="productPreviewDescription" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p id="productPriceText" class="card-text fw-bold">LKR 1200</p>
                     <div class="row justify-content-between">
                         <div class="col-7"> <a href="#" disabled class="btn disabled btn-sm btn-outline-success">Added to cart <i class="bi bi-bag-check-fill"></i></a></div>
                     </div>
@@ -72,5 +77,9 @@
 
     document.getElementById("productImage").addEventListener("input", (event) => {
         document.getElementById("productPreviewImage").src = event.target.value;
+    });
+
+    document.getElementById("productPrice").addEventListener("input", (event) => {
+        document.getElementById("productPriceText").innerText = `LKR ${event.target.value}`;
     });
 </script>

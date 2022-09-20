@@ -44,6 +44,28 @@ class ProductService extends EntityService
         return $this->create_product_from_record($product_arr);
     }
 
+    public function update_product(array $data): EntityOperationResult
+    {
+        $is_exist = $this->databaseService->record_exists($this->table_name, $data['product_id']);
+        if ($is_exist) {
+            $success = $this->databaseService->update_record($this->table_name, [
+                'name' => $data['name'],
+                'description' => $data['description'],
+                'image_url' => $data['image_url'],
+                'download_link' => $data['download_link'],
+                'category_id' => $data['category_id'],
+                'price' => $data['price'],
+                'quantity' => $data['quantity']
+            ], $data['product_id']);
+
+            $this->categoryService->remove_product_from_category($data['product_id'], $data['category_id']);
+            $this->categoryService->add_product_to_category($data['product_id'], $data['category_id']);
+            if ($success)
+                return new EntityOperationResult(true, "Product '" . $data['name'] . "' has been updated!");
+        }
+        return new EntityOperationResult(false, "Product update failed!");
+    }
+
     public function create_new_product_from_request(array $data): EntityOperationResult
     {
         $is_exist = $this->databaseService->record_exists_by_field($this->table_name, 'name', $data['name']);
@@ -54,16 +76,7 @@ class ProductService extends EntityService
         if ($this->save_to_database($product)) {
             return new EntityOperationResult(true, "Product '" . $product->get_name() . "' successfully created!");
         }
-        return new EntityOperationResult(false, "product creation failed!");
-    }
-
-    protected function extended_store_db_func(object $product): bool
-    {
-        $category = $product->get_category();
-        return $this->databaseService->create_record(
-            "category_product",
-            ["category_id" => $category->get_id(), "product_id" => $product->get_id()]
-        );
+        return new EntityOperationResult(false, "Product creation failed!");
     }
 
     public function get_all(): array
@@ -75,5 +88,11 @@ class ProductService extends EntityService
             array_push($results_arr, $product);
         }
         return $results_arr;
+    }
+
+    protected function extended_store_db_func(object $product): bool
+    {
+        $category = $product->get_category();
+        return $this->categoryService->add_product_to_category($product->get_id(), $category->get_id());
     }
 }
