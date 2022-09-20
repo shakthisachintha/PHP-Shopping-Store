@@ -13,7 +13,8 @@ class AuthController extends BaseController
 
     public function show_index()
     {
-        $this->render('views/pages/html_index', ["title" => "Home"]);
+        $products = $this->ProductService->get_all();
+        $this->render('views/pages/html_index', ["title" => "Home", "products"=>$products]);
     }
 
     public function show_login_register()

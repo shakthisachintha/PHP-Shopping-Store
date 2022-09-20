@@ -10,22 +10,23 @@
                     <a class="nav-link active" aria-current="page" href="<?= build_route("") ?>">Home</a>
                 </li>
                 <li class="nav-item ps-3">
-                    <a class="nav-link" href="#">Shop</a>
+                    <a class="nav-link" href="<?=build_route('shop')?>">Shop</a>
                 </li>
                 <li class="nav-item ps-3">
                     <a class="nav-link" href="#">Grades</a>
                 </li>
-                <li class="nav-item ps-3 dropdown">
-                    <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Admin
-                    </a>
-                    <ul class="dropdown-menu mt-3">
-                        <li><a class="dropdown-item" href="<?= build_route("products") ?>">Products</a></li>
-                        <li><a class="dropdown-item" href="<?= build_route("category-create") ?>">Categories</a></li>
-                        <li><a class="dropdown-item" href="#">Orders</a></li>
-                    </ul>
-                </li>
-
+                <?php if ($authService->is_admin()) : ?>
+                    <li class="nav-item ps-3 dropdown">
+                        <a class="nav-link text-warning fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Admin
+                        </a>
+                        <ul class="dropdown-menu mt-3">
+                            <li><a class="dropdown-item" href="<?= build_route("products") ?>">Products</a></li>
+                            <li><a class="dropdown-item" href="<?= build_route("category-create") ?>">Categories</a></li>
+                            <li><a class="dropdown-item" href="#">Orders</a></li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
 
                 <li class="nav-item ps-3 dropdown">
                     <!-- <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -72,6 +73,7 @@
                     <ul class="dropdown-menu dropdown-menu-end mt-3">
 
                         <?php if ($authService->is_logged()) : ?>
+                            <li><a class="dropdown-item" href="<?= build_route("my-orders") ?>"><i class="bi bi-box2"></i> My Orders</a></li>
                             <li><a class="dropdown-item" href="<?= build_route("user-account") ?>"><i class="bi bi-person-lines-fill"></i> Account</a></li>
                             <li>
                                 <hr class="dropdown-divider">

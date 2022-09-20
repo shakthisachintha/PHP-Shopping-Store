@@ -14,12 +14,12 @@ $routes = [
     // Product Routes
     ['url' => '/products',           'methods' => ['GET'],                                  'handler' => 'ProductController::show_index'],
     ['url' => '/product-create',     'methods' => ['GET'],      'middlewares'=>['admin'],   'handler' => 'ProductController::show_create_view'],
-    ['url' => '/product-view',       'methods' => ['GET'],                                  'handler' => 'ProductController::show_product_view'],
-    ['url' => '/product-update',     'methods' => ['GET'],      'middlewares'=>['admin'],   'handler' => 'ProductController::show_update_view'],
-    ['url' => '/product-delete',     'methods' => ['GET'],      'middlewares'=>['admin'],   'handler' => 'ProductController::show_delete_view'],
+    ['url' => '/product-view',       'methods' => ['GET'],      'middlewares'=>['admin'],   'handler' => 'ProductController::show_product_view'],
+    ['url' => '/product-delete',     'methods' => ['GET'],      'middlewares'=>['admin'],   'handler' => 'ProductController::handle_product_delete'],
     ['url' => '/product-save',       'methods' => ['POST'],     'middlewares'=>['admin'],   'handler' => 'ProductController::handle_create'],
-    ['url' => '/product-update',     'methods' => ['POST'],     'middlewares'=>['admin'],   'handler' => 'ProductController::handle_update'],
+    ['url' => '/product-update',     'methods' => ['POST'],     'middlewares'=>['admin'],   'handler' => 'ProductController::handle_product_update'],
     ['url' => '/product-delete',     'methods' => ['POST'],     'middlewares'=>['admin'],   'handler' => 'ProductController::handle_delete'],
+    ['url' => '/shop',               'methods' => ['GET'],                                  'handler' => 'ProductController::show_shop_view'],
 
     // Category Routes
     ['url' => '/category-create',    'methods' => ['GET'],      'middlewares'=>['admin'],   'handler' => 'CategoryController::show_create_view'],
@@ -44,5 +44,6 @@ $routes = [
     ['url' => '/order-download',      'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'OrderController::handle_order_product_download'],
 
     // User Routes
-    ['url' => '/user-account',        'methods' => ['GET'],     'handler' => 'UserController::show_user_account'],
+    ['url' => '/user-account',        'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'UserController::show_user_account'],
+    ['url' => '/my-orders',           'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'UserController::show_user_orders'],
 ];

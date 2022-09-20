@@ -5,6 +5,7 @@ require_once(__DIR__ . '/../controllers/CategoryController.php');
 require_once(__DIR__ . '/../controllers/ProductController.php');
 require_once(__DIR__ . '/../controllers/ShoppingCartController.php');
 require_once(__DIR__ . '/../controllers/OrderController.php');
+require_once(__DIR__ . '/../controllers/UserController.php');
 
 $parsed_url = parse_url($_SERVER['REQUEST_URI']);
 $requested_path = $parsed_url['path'];
@@ -14,6 +15,7 @@ $controller_registry = [
     "ProductController" => new ProductController(),
     "ShoppingCartController" => new ShoppingCartController(),
     "OrderController" => new OrderController(),
+    "UserController" => new UserController(),
 ];
 
 foreach ($routes as $route) {

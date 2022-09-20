@@ -40,4 +40,8 @@ class ProductController extends BaseController
     public function handle_product_delete(array $request){
         echo "prodcut delete feature will be implemented in the next iteration.";
     }
+
+    public function show_shop_view(){
+        echo "Shop view";
+    }
 }
