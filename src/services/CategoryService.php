@@ -28,6 +28,16 @@ class CategoryService extends EntityService
         }
     }
 
+    public function remove_product_from_category(string $product_id, string $category_id): bool
+    {
+        $res = $this->databaseService->delete_by_fields('category_product', ["category_id" => $category_id, "product_id" => $product_id]);
+        return $res;
+    }
+
+    public function add_product_to_category(string $product_id, string $category_id): bool{
+        return $this->databaseService->create_record("category_product", ["product_id"=>$product_id, "category_id"=>$category_id]);
+    }
+
     public function get_category_by_id(string $id): Category | NULL
     {
         $category_arr = $this->databaseService->retrieve_by_id($this->table_name, $id);

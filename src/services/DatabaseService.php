@@ -97,9 +97,10 @@ class DatabaseService
     {
         $query = "UPDATE $table SET ";
         foreach ($data as $column => $value) {
-            $query .= "$column = '$value'";
+            $query .= " $column = '$value',";
         }
-        $query .= " WHERE id = '$id'";
+        $query = substr($query, 0, -1);
+        $query .= " WHERE id = '$id';";
         return $this->connection->query($query);
     }
 
@@ -107,6 +108,20 @@ class DatabaseService
     {
         $query = "DELETE FROM $table WHERE id='$id'";
         if ($this->connection->query($query) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function delete_by_fields(string $table, array $data): bool
+    {
+        $query_str = "DELETE FROM $table WHERE ";
+        foreach ($data as $key => $value) {
+            $query_str .= "$key = '$value' AND ";
+        }
+        $query_str = substr($query_str, 0, -1 * 5) . ";";
+        if ($this->connection->query($query_str) === TRUE) {
             return true;
         } else {
             return false;
