@@ -22,23 +22,37 @@
 
                     <tr>
                         <td>Payment Method</td>
-                        <td><?= $order->get_payment_method()->value ?></td>
+                        <td><?= ucfirst($order->get_payment_method()->value) ?></td>
                     </tr>
 
                     <tr>
                         <td>Payment Status</td>
-                        <td><?= $order->get_payment_status()->value ?></td>
+                        <td><?= ucfirst($order->get_payment_status()->value) ?></td>
                     </tr>
 
                     <tr>
                         <td>Order Status</td>
-                        <td><?= $order->get_status()->value ?></td>
+                        <td><?= ucfirst($order->get_status()->value) ?></td>
                     </tr>
 
                     <tr>
                         <td>Order Type</td>
-                        <td><?= $order->get_type()->value ?></td>
+                        <td><?= ucfirst($order->get_type()->value) ?>
+                            <?php if ($order->get_type() === OrderType::Online && $order->get_payment_status() === PaymentStatus::Complete) : ?>
+                                <small class="text-muted"><br>You can download the books now.</small>
+                            <?php endif; ?>
+                            <?php if ($order->get_type() === OrderType::Delivery && $order->get_payment_status() === PaymentStatus::Complete) : ?>
+                                <small class="text-muted text-wrap"><br>Order will be delivered to your account address.</small>
+                            <?php endif; ?>
+                        </td>
                     </tr>
+                    <?php if ($order->get_type() === OrderType::Delivery) : ?>
+                        <tr>
+                            <td>Delivery Address</td>
+                            <td class="text-break"><?=$order->get_user()->get_address()?></td>
+                        </tr>
+                        
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
@@ -64,7 +78,7 @@
                                 <td><?= $data->get_name() ?></td>
                                 <td>1</td>
                                 <td>LKR <?= $data->get_price() ?></td>
-                                <?php if ($order->get_type() === OrderType::Online) : ?>
+                                <?php if ($order->get_payment_status() === PaymentStatus::Complete && $order->get_type() === OrderType::Online) : ?>
                                     <td><a target="new" href="<?= build_route_get('order-download', ['product_id' => $data->get_id()]) ?>" class="text-success text-decoration-none"><i class="bi bi-download"></i></a></td>
                                 <?php endif; ?>
                             </tr>
@@ -79,7 +93,7 @@
                     </tfoot>
                 </table>
             <?php else : ?>
-                <p class="text-secondary">Your shopping cart is empty, add some products to complete the checkout.</p>
+                <p class="text-secondary">You don't have any products in this order.</p>
             <?php endif; ?>
         </div>
     </div>

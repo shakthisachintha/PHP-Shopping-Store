@@ -93,9 +93,26 @@ class OrderService extends EntityService
         else return NULL;
     }
 
+    public function get_user_orders(string $user_id): array
+    {
+        $orders_recs = $this->databaseService->retrieve_by_field($this->table_name, 'user_id', $user_id);
+        $orders = array();
+        foreach ($orders_recs as $order_rec) {
+            $order = $this->get_order_by_id($order_rec['id']);
+            array_push($orders, $order);
+        }
+        return $orders;
+    }
+
     public function update_payment_status(string $order_id, string $payment_status)
     {
-        $success = $this->databaseService->update_record($this->table_name, ['payment_status' => $payment_status], $order_id);
+        $order = $this->get_order_by_id($order_id);
+        $data = ['payment_status' => $payment_status];
+        if ($order->get_type() === OrderType::Online && $payment_status === 'complete') {
+            $data = ['payment_status' => $payment_status, "status" => OrderStatus::Completed->value];
+        }
+        if ($payment_status === 'complete')
+            $success = $this->databaseService->update_record($this->table_name, $data, $order_id);
         if ($success) return new EntityOperationResult(TRUE, "");
         else return new EntityOperationResult(FALSE, "");
     }

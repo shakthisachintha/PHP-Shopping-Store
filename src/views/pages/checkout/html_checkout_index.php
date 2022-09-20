@@ -46,7 +46,7 @@
                 <form class="mt-4" action="<?= build_route("checkout-order") ?>" method="POST">
                     <div class="mb-4">
                         <label for="orderType" class="form-label">Select delivery method <span class="text-danger">*</span></label>
-                        <select id="orderType" name="type" class="form-select">
+                        <select id="orderType" name="order_type" class="form-select">
                             <option selected value="online">Online Download</option>
                             <option value="delivery">Deliver by Post</option>
                         </select>
@@ -58,8 +58,8 @@
                         <input value="card" type="radio" class="btn-check" name="payment_method" id="card-payment" autocomplete="off" checked>
                         <label class="btn btn-outline-dark" for="card-payment">Card Payment <i class="bi bi-credit-card-2-back"></i></label>
 
-                        <input value="cod" type="radio" class="btn-check" name="payment_method" id="cod-delivery" autocomplete="off">
-                        <label class="btn btn-outline-dark ms-2" for="cod-delivery">Cash on Delivery <i class="bi bi-cash-coin"></i></label>
+                        <input value="cod" type="radio" class="btn-check d-none" name="payment_method" id="cod-delivery" autocomplete="off">
+                        <label class="btn btn-outline-dark ms-2 d-none" id="cod-delivery-label" for="cod-delivery">Cash on Delivery <i class="bi bi-cash-coin"></i></label>
                     </div>
                     <button type="submit" class="mt-4 btn w-100 btn-outline-dark">Proceed to Payment</button>
                 </form>
@@ -84,12 +84,21 @@
 </div>
 
 <script>
-    document.getElementById("productCategory").addEventListener("input", (event) => {
-        console.log();
-        if (event.target.value === "delivery")
+    document.getElementById("orderType").addEventListener("input", (event) => {
+        console.log(event.target.value);
+        if (event.target.value === "delivery") {
             document.getElementById("address_form").classList.remove("d-none");
+            document.getElementById("cod-delivery").classList.remove("d-none");
+            document.getElementById("cod-delivery-label").classList.remove("d-none");
+        }
 
-        if (event.target.value === "online")
+
+        if (event.target.value === "online") {
             document.getElementById("address_form").classList.add("d-none");
+            document.getElementById("cod-delivery").classList.add("d-none");
+            document.getElementById("cod-delivery-label").classList.add("d-none");
+
+        }
+
     });
 </script>
