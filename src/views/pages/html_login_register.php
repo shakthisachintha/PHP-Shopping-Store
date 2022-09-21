@@ -16,23 +16,24 @@
                 </div>
                 <div class="mb-3">
                     <label for="registerEmail" class="form-label">Email address <span class="text-danger">*</span></label>
-                    <input type="email" name="email" class="form-control" id="registerEmail" aria-describedby="regEmailHelp">
+                    <input type="email" name="email" required class="form-control" id="registerEmail" aria-describedby="regEmailHelp">
                     <div id="regEmailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
                 <div class="mb-3">
                     <label for="registerPasswordOne" class="form-label">Password <span class="text-danger">*</span></label>
-                    <input type="password" name="password" class="form-control" id="registerPasswordOne">
+                    <input type="password" required minlength="5" name="password" class="form-control" id="registerPasswordOne">
                 </div>
                 <div class="mb-3">
                     <label for="registerPasswordTwo" class="form-label">Confirm Password <span class="text-danger">*</span></label>
-                    <input type="password" class="form-control" id="registerPasswordTwo">
+                    <input type="password" required minlength="5" class="form-control" id="registerPasswordTwo">
+                    <div id="registerPasswordTwoHelp" class="form-text d-none text-danger">Passwords does not match</div>
                 </div>
                 <div class="mb-3">
                     <label for="registerAddress" class="form-label">Postal Address <span class="text-danger">*</span></label>
-                    <textarea class="form-control" name="address" id="registerAddress" rows="3" aria-describedby="registerAddressHelp"></textarea>
+                    <textarea class="form-control" required minlength="15" name="address" id="registerAddress" rows="3" aria-describedby="registerAddressHelp"></textarea>
                     <div id="registerAddressHelp" class="form-text">We need this to deliver your packages.</div>
                 </div>
-                <button type="submit" class="mt-3 btn btn-outline-dark">Register</button>
+                <button type="submit" id="btnRegSubmit" disabled class="mt-3 btn btn-outline-dark">Register</button>
             </form>
         </div>
         <div class="col-lg-6 border-start ps-5">
@@ -40,11 +41,11 @@
             <form class="mt-4" action="<?= build_route("login") ?>" method="POST">
                 <div class="mb-3">
                     <label for="loginEmail" class="form-label">Email address <span class="text-danger">*</span></label>
-                    <input type="email" name="email" class="form-control" id="loginEmail">
+                    <input type="email" name="email" required class="form-control" id="loginEmail">
                 </div>
                 <div class="mb-3">
                     <label for="loginPassword" class="form-label">Password <span class="text-danger">*</span></label>
-                    <input type="password" name="password" class="form-control" id="loginPassword">
+                    <input type="password" required name="password" class="form-control" id="loginPassword">
                 </div>
                 <div class="row align-items-center">
                     <div class="col">
@@ -58,3 +59,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById("registerPasswordTwo").addEventListener("input", (event) => {
+        if (document.getElementById("registerPasswordOne").value != event.target.value) {
+            document.getElementById("registerPasswordTwoHelp").classList.remove("d-none");
+            document.getElementById("btnRegSubmit").setAttribute('disabled', '');
+        } else {
+            document.getElementById("registerPasswordTwoHelp").classList.add("d-none");
+            document.getElementById("btnRegSubmit").removeAttribute('disabled', '');
+        }
+    });
+</script>

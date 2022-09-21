@@ -48,7 +48,7 @@ class DatabaseService
     function retrieve_by_field(string $table, string $field, string $value): array
     {
         $results_array = array();
-        $query = "SELECT * FROM $table WHERE $field='$value'";
+        $query = "SELECT * FROM $table WHERE $field='$value';";
         $result = $this->connection->query($query);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {

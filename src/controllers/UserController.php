@@ -7,7 +7,8 @@ class UserController extends BaseController {
     }
     
     public function show_user_account(){
-        echo "User Account Screen";
+        $user = $this->AuthService->get_current_user();
+        $this->render('views/pages/user/html_user_account', ["title" => "My account", "user"=>$user]);
     }
 
     public function show_user_orders(){

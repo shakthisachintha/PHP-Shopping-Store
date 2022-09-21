@@ -43,7 +43,7 @@ class AuthService
         }
         $correct_pw = $this->userService->verify_user_password($password, $user->get_id());
         if ($correct_pw) {
-            session_reset();
+            unset($_SESSION["user"]);
             $_SESSION['user'] = $user;
             RouterService::Redirect(build_route(''));
             return;
@@ -63,6 +63,7 @@ class AuthService
         $user = $this->userService->create_new($user_data);
         $registered = $this->userService->register_new_user($user, $user_data['password']);
         if ($registered) {
+            RouterService::set_seesion_success("Hi! ". ucwords($user->get_name()) ."Registration completed, now you can continue shopping.");
             $this->login($user->get_email(), $user_data['password']);
             return;
         }

@@ -17,7 +17,5 @@
                 <button type="submit" class="mt-3 btn btn-outline-dark">Create category</button>
             </form>
         </div>
-
-
     </div>
 </div>
