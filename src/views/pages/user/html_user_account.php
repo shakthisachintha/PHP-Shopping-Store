@@ -10,7 +10,7 @@
     <div class="row mt-5">
         <div class="col-lg-6 pe-5">
             <h3>Account Details</h3>
-            <form class="mt-4" action="<?= build_route("register") ?>" method="POST">
+            <form class="mt-4" action="<?=build_route('account-update')?>" method="POST">
                 <div class="mb-3">
                     <label for="registerName" class="form-label">Name <span class="text-danger">*</span></label>
                     <input type="text" name="name" required minlength="5" value="<?= ucwords($user->get_name()) ?>" class="form-control" id="registerName">
@@ -32,7 +32,7 @@
 
         <div class="col-lg-6 border-start ps-5">
             <h3>Update Password</h3>
-            <form class="mt-4" method="POST">
+            <form class="mt-4" method="POST" action="<?=build_route('password-update')?>">
                 <div class="mb-3">
                     <label for="currentPassword" class="form-label">Current Password <span class="text-danger">*</span></label>
                     <input type="password" required name="current_password" class="form-control" id="currentPassword">

@@ -33,11 +33,20 @@ class UserService extends EntityService
 
     public function register_new_user(User $user, string $password): bool
     {
-        $hashed_pw = password_hash($password, PASSWORD_BCRYPT);
         if ($this->save_to_database($user)) {
-            return $this->databaseService->update_record($this->table_name, ['password' => $hashed_pw], $user->get_id());
+            return $this->update_password($user->get_id(), $password);
         }
         return false;
+    }
+
+    public function update_password(string $user_id, string $password): bool
+    {
+        $hashed_pw = password_hash($password, PASSWORD_BCRYPT);
+        return $this->databaseService->update_record($this->table_name, ['password' => $hashed_pw], $user_id);
+    }
+
+    public function update_user_details(string $user_id, string $address, string $name): bool {
+        return $this->databaseService->update_record($this->table_name, ['name'=>$name, 'address'=>$address], $user_id);
     }
 
     public function get_user_by_email(string $email): User | NULL

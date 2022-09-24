@@ -46,4 +46,6 @@ $routes = [
     // User Routes
     ['url' => '/user-account',        'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'UserController::show_user_account'],
     ['url' => '/my-orders',           'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'UserController::show_user_orders'],
+    ['url' => '/password-update',     'methods' => ['POST'],    'middlewares'=>['auth'],   'handler' => 'UserController::handle_password_update'],
+    ['url' => '/account-update',      'methods' => ['POST'],    'middlewares'=>['auth'],   'handler' => 'UserController::handle_account_update'],
 ];
