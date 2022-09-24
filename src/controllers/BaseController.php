@@ -31,6 +31,7 @@ class BaseController
         extract($param, EXTR_SKIP);
         $authService = $this->AuthService;
         $shoppingCart = $this->ShoppingCartService->get_empty_shopping_cart();
+        $categories = $this->CategoryService->get_all();
         if ($authService->is_logged()) {
             $shoppingCart = $this->ShoppingCartService->get_customer_shopping_cart($authService->get_current_user()->get_id());
         }

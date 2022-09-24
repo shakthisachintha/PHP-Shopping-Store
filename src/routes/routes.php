@@ -23,6 +23,7 @@ $routes = [
 
     // Category Routes
     ['url' => '/category-create',    'methods' => ['GET'],      'middlewares'=>['admin'],   'handler' => 'CategoryController::show_create_view'],
+    ['url' => '/category',           'methods' => ['GET'],                                  'handler' => 'CategoryController::show_category_products'],
     ['url' => '/category-view',      'methods' => ['GET'],                                  'handler' => 'CategoryController::show_category_view'],
     ['url' => '/category-update',    'methods' => ['GET'],      'middlewares'=>['admin'],   'handler' => 'CategoryController::show_update_view'],
     ['url' => '/category-delete',    'methods' => ['GET'],      'middlewares'=>['admin'],   'handler' => 'CategoryController::show_delete_view'],

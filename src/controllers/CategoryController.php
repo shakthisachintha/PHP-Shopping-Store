@@ -17,6 +17,21 @@ class CategoryController extends BaseController
     {
         echo 'category - show_delete_view';
     }
+
+    public function show_category_products(array $request)
+    {
+        $products = $this->ProductService->get_category_products($request['category_id']);
+        if (count($products) === 0) return RouterService::RedirectWithErrors('shop', ["No products found for the selected grade."]);
+        else {
+            $category = $this->CategoryService->get_category_by_id($request['category_id']);
+            $this->render("views/pages/products/html_category_products", [
+                "title" => ucwords($category->get_name() . " - Products"),
+                "products" => $products,
+                "category" => $category,
+            ]);
+        }
+    }
+
     public function handle_create(array $request)
     {
         $resp = $this->CategoryService->create_new_category_from_request($request);

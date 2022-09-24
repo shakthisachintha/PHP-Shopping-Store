@@ -12,9 +12,17 @@
                 <li class="nav-item ps-3">
                     <a class="nav-link <?= get_active_route() === '/shop' ? "active" : "" ?>" href="<?= build_route('shop') ?>">Shop</a>
                 </li>
-                <li class="nav-item ps-3">
-                    <a class="nav-link" href="#">Grades</a>
+                <li class="nav-item ps-3 dropdown">
+                    <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Grades
+                    </a>
+                    <ul class="dropdown-menu mt-3">
+                        <?php foreach ($categories as $cat) : ?>
+                            <li><a class="dropdown-item" href="<?=build_route_get('category', ['category_id'=>$cat->get_id()])?>"><?= ucwords($cat->get_name()) ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
                 </li>
+
                 <?php if ($authService->is_admin()) : ?>
                     <li class="nav-item ps-3 dropdown">
                         <a class="nav-link text-warning fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

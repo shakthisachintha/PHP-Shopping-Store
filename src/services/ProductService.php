@@ -90,6 +90,20 @@ class ProductService extends EntityService
         return $results_arr;
     }
 
+    public function get_category_products(string $category_id): array
+    {
+        $prod_array = array();
+        $is_exist = $this->databaseService->record_exists('category', $category_id);
+        if (!$is_exist)
+            return $prod_array;
+        $cat_recs = $this->databaseService->retrieve_by_field('category_product', 'category_id', $category_id);
+        foreach ($cat_recs as $rec) {
+            $prod = $this->get_product_by_id($rec['product_id']);
+            array_push($prod_array, $prod);
+        }
+        return $prod_array;
+    }
+
     protected function extended_store_db_func(object $product): bool
     {
         $category = $product->get_category();
