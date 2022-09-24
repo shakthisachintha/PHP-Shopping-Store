@@ -134,6 +134,16 @@ function build_route(string $url): string
     return BASE_URL . ":" . PORT_NUMBER . "/$url";
 }
 
+function get_active_route(): string
+{
+    $parsed_url = parse_url($_SERVER['REQUEST_URI']);
+    $requested_path = $parsed_url['path'];
+    // echo "active route = ".$requested_path;
+    // exit();
+    return $requested_path;
+
+}
+
 function build_route_get(string $url, array $data_arr): string
 {
     $query_str = "";
@@ -154,7 +164,7 @@ function execute_middlewares(array $middlewares, array $input_params)
         'auth' => 'checkAuth',
         'admin' => 'checkAdmin'
     ];
-    
+
     foreach ($middlewares as $middleware) {
         $result = call_user_func($func_mapping[$middleware], $input_params);
     }

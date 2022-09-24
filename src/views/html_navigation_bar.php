@@ -7,10 +7,10 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item ps-3">
-                    <a class="nav-link active" aria-current="page" href="<?= build_route("") ?>">Home</a>
+                    <a class="nav-link <?= get_active_route() === '/' ? "active" : "" ?>" aria-current="page" href="<?= build_route("") ?>">Home</a>
                 </li>
                 <li class="nav-item ps-3">
-                    <a class="nav-link" href="<?=build_route('shop')?>">Shop</a>
+                    <a class="nav-link <?= get_active_route() === '/shop' ? "active" : "" ?>" href="<?= build_route('shop') ?>">Shop</a>
                 </li>
                 <li class="nav-item ps-3">
                     <a class="nav-link" href="#">Grades</a>
@@ -67,8 +67,8 @@
                 </li>
 
                 <li class="nav-item ps-3 dropdown">
-                    <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="text-light bi bi-person-circle"></i>
+                    <a class="nav-link <?= $authService->is_logged() ? "text-info" : "text-light" ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end mt-3">
 

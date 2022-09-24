@@ -2,7 +2,7 @@
     <div class="container-fluid py-5">
         <h1 class="display-5 fw-bold"><?= SITE_NAME ?></h1>
         <p class="col-md-8 fs-4"><?= SITE_DESCRIPTION_MAIN ?></p>
-        <button class="btn btn-dark btn-lg" type="button">Shop Online...</button>
+        <a class="btn btn-dark btn-lg" href="<?=build_route('shop')?>" >Shop Online...</a>
     </div>
 </div>
 
