@@ -23,9 +23,9 @@ class Category extends BaseEntity
         return $this->name;
     }
 
-    function add_products(Product $product): void
+    function add_products(array $products): void
     {
-        array_push($this->products, $product);
+        $this->products= $products;
     }
 
     function get_products(): array

@@ -22,13 +22,13 @@ $routes = [
     ['url' => '/shop',               'methods' => ['GET'],                                  'handler' => 'ProductController::show_shop_view'],
 
     // Category Routes
-    ['url' => '/category-create',    'methods' => ['GET'],      'middlewares'=>['admin'],   'handler' => 'CategoryController::show_create_view'],
     ['url' => '/category',           'methods' => ['GET'],                                  'handler' => 'CategoryController::show_category_products'],
-    ['url' => '/category-view',      'methods' => ['GET'],                                  'handler' => 'CategoryController::show_category_view'],
-    ['url' => '/category-update',    'methods' => ['GET'],      'middlewares'=>['admin'],   'handler' => 'CategoryController::show_update_view'],
-    ['url' => '/category-delete',    'methods' => ['GET'],      'middlewares'=>['admin'],   'handler' => 'CategoryController::show_delete_view'],
-    ['url' => '/category-save',      'methods' => ['POST'],     'middlewares'=>['admin'],   'handler' => 'CategoryController::handle_create'],
+    ['url' => '/category-create',    'methods' => ['GET'],      'middlewares'=>['admin'],   'handler' => 'CategoryController::show_create_view'],
+    ['url' => '/category-view',      'methods' => ['GET'],      'middlewares'=>['admin'],   'handler' => 'CategoryController::show_update_view'],
+    ['url' => '/categories',         'methods' => ['GET'],      'middlewares'=>['admin'],   'handler' => 'CategoryController::show_all_category_view'],
     ['url' => '/category-update',    'methods' => ['POST'],     'middlewares'=>['admin'],   'handler' => 'CategoryController::handle_update'],
+    ['url' => '/category-delete',    'methods' => ['GET'],      'middlewares'=>['admin'],   'handler' => 'CategoryController::handle_category_delete'],
+    ['url' => '/category-save',      'methods' => ['POST'],     'middlewares'=>['admin'],   'handler' => 'CategoryController::handle_create'],
     ['url' => '/category-delete',    'methods' => ['POST'],     'middlewares'=>['admin'],   'handler' => 'CategoryController::handle_delete'],
 
     // Shopping Cart Routes

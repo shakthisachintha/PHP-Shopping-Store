@@ -76,7 +76,7 @@
                     </textarea>
                     <div id="registerAddressHelp" class="form-text">We will courier your order to this address.</div>
                 </div>
-                <button type="submit" class="mt-3 btn btn-outline-dark">Update address</button>
+                <a href="<?=build_route('user-account')?>" class="mt-3 btn btn-outline-dark">Update address</a>
             </form>
         </div>
 

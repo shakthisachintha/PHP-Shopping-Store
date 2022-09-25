@@ -30,7 +30,7 @@
                         </a>
                         <ul class="dropdown-menu mt-3">
                             <li><a class="dropdown-item" href="<?= build_route("products") ?>">Products</a></li>
-                            <li><a class="dropdown-item" href="<?= build_route("category-create") ?>">Categories</a></li>
+                            <li><a class="dropdown-item" href="<?= build_route("categories") ?>">Categories</a></li>
                             <li><a class="dropdown-item" href="#">Orders</a></li>
                         </ul>
                     </li>

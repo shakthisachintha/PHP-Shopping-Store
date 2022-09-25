@@ -52,7 +52,7 @@
 
         <div class="col-lg-6 align-items-center d-flex">
             <div class="card mx-auto border-0 shadow" style="width: 20rem;">
-                <img id="productPreviewImage" src="https://i.ibb.co/Tb78qnR/Screenshot-2022-08-14-at-9-22-45-PM.png" class="card-img-top" alt="...">
+                <img id="productPreviewImage" src="https://i.ibb.co/3v5980Y/sanya-podu-test.png" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 id="productPreviewName" class="card-title">Grade 10 History Past Papers</h5>
                     <p id="productPreviewDescription" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

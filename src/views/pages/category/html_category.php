@@ -8,7 +8,7 @@
         <div class="col align-items-center d-flex">
             <a class="btn ms-auto btn-outline-dark" href="<?= build_route("category-create") ?>">Create new + </i></a>
         </div>
-        
+
     </div>
 
     <div class="row">
@@ -17,90 +17,25 @@
         </div>
     </div>
 
-    <div class="row pt-5 g-5">
+    <div class="row g-5">
         <div class="col">
-            <div class="card me-auto border-0 shadow" style="width: 20rem;">
-                <img src="https://i0.wp.com/lol.lk/wp-content/uploads/2021/12/book-template.jpg?fit=1576%2C1576&ssl=1" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Grade 10 History Past Papers</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <div class="row justify-content-between">
-                        <div class="col-7"> <a href="#" class="btn btn-sm btn-outline-dark">Add to cart <i class="bi bi-bag-plus"></i></a></div>
-                        <div class="col-7"> <a href="#" class="btn btn-sm btn-outline-success">Added to cart <i class="bi bi-bag-check-fill"></i></a></div>
-                        <div class="col-4"><a href="#" class="btn btn-sm btn-outline-danger">Edit <i class="bi bi-pencil-square"></i></a></div>
+            <?php if ((isset($new_categories) && count($new_categories) >= 0)) : ?>
+                <p class="small text-muted">Note: Inorder to delete a category it should not contain any products.</p>
+                <?php foreach ($new_categories as $category) : ?>
+                    <div class="p-3 my-5 border">
+                        <h5><?= ucwords($category->get_name()) ?>&nbsp; <a href="<?= build_route_get('category-view', ["category_id" => $category->get_id()]) ?>"><i class="bi bi-pencil-square"></i></a></h5>
+                        <?php if (count($category->get_products()) > 0) : ?>
+                            <?php foreach ($category->get_products() as $prd) : ?>
+                                <a class="" href="<?= build_route_get("product-view", ['product_id' => $prd->get_id()]) ?>"><span class="badge p-2 px-3 m-2 fw-light rounded-pill bg-primary"><?= $prd->get_name() ?></span></a>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <a class="" href="<?= build_route_get("category-delete", ['category_id' => $category->get_id()]) ?>"><span class="badge p-2 px-3 m-2 fw-light rounded-pill bg-danger">Delete Category</span></a>
+                        <?php endif; ?>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card mx-auto border-0 shadow" style="width: 20rem;">
-                <img src="https://i0.wp.com/lol.lk/wp-content/uploads/2022/01/21.jpg?fit=1576%2C1576&ssl=1" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Grade 10 History Past Papers</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <div class="row justify-content-between">
-                        <div class="col-7"> <a href="#" class="btn btn-sm btn-outline-dark">Add to cart <i class="bi bi-bag-plus"></i></a></div>
-                        <div class="col-7"> <a href="#" class="btn btn-sm btn-outline-success">Added to cart <i class="bi bi-bag-check-fill"></i></a></div>
-                        <div class="col-4"><a href="#" class="btn btn-sm btn-outline-danger">Edit <i class="bi bi-pencil-square"></i></a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card border-0 ms-auto shadow" style="width: 20rem;">
-                <img src="https://i0.wp.com/lol.lk/wp-content/uploads/2021/12/WB.jpg?fit=1576%2C1576&ssl=1" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Grade 10 History Past Papers</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <div class="row justify-content-between">
-                        <div class="col-7"> <a href="#" class="btn btn-sm btn-outline-dark">Add to cart <i class="bi bi-bag-plus"></i></a></div>
-                        <div class="col-7"> <a href="#" class="btn btn-sm btn-outline-success">Added to cart <i class="bi bi-bag-check-fill"></i></a></div>
-                        <div class="col-4"><a href="#" class="btn btn-sm btn-outline-danger">Edit <i class="bi bi-pencil-square"></i></a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card me-auto border-0 shadow" style="width: 20rem;">
-                <img src="https://i0.wp.com/lol.lk/wp-content/uploads/2021/12/book-template.jpg?fit=1576%2C1576&ssl=1" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Grade 10 History Past Papers</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <div class="row justify-content-between">
-                        <div class="col-7"> <a href="#" class="btn btn-sm btn-outline-dark">Add to cart <i class="bi bi-bag-plus"></i></a></div>
-                        <div class="col-7"> <a href="#" class="btn btn-sm btn-outline-success">Added to cart <i class="bi bi-bag-check-fill"></i></a></div>
-                        <div class="col-4"><a href="#" class="btn btn-sm btn-outline-danger">Edit <i class="bi bi-pencil-square"></i></a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card mx-auto border-0 shadow" style="width: 20rem;">
-                <img src="https://i0.wp.com/lol.lk/wp-content/uploads/2021/12/book-template.jpg?fit=1576%2C1576&ssl=1" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Grade 10 History Past Papers</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <div class="row justify-content-between">
-                        <div class="col-7"> <a href="#" class="btn btn-sm btn-outline-dark">Add to cart <i class="bi bi-bag-plus"></i></a></div>
-                        <div class="col-7"> <a href="#" class="btn btn-sm btn-outline-success">Added to cart <i class="bi bi-bag-check-fill"></i></a></div>
-                        <div class="col-4"><a href="#" class="btn btn-sm btn-outline-danger">Edit <i class="bi bi-pencil-square"></i></a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card border-0 ms-auto shadow" style="width: 20rem;">
-                <img src="https://i0.wp.com/lol.lk/wp-content/uploads/2021/12/book-template.jpg?fit=1576%2C1576&ssl=1" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Grade 10 History Past Papers</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <div class="row justify-content-between">
-                        <div class="col-7"> <a href="#" class="btn btn-sm btn-outline-dark">Add to cart <i class="bi bi-bag-plus"></i></a></div>
-                        <div class="col-7"> <a href="#" class="btn btn-sm btn-outline-success">Added to cart <i class="bi bi-bag-check-fill"></i></a></div>
-                        <div class="col-4"><a href="#" class="btn btn-sm btn-outline-danger">Edit <i class="bi bi-pencil-square"></i></a></div>
-                    </div>
-                </div>
-            </div>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <p class="text-muted">You don't have any categories created!</p>
+            <?php endif; ?>
         </div>
     </div>
 </div>

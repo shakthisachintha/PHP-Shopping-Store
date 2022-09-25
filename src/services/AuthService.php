@@ -72,7 +72,7 @@ class AuthService
         $user = $this->userService->create_new($user_data);
         $registered = $this->userService->register_new_user($user, $user_data['password']);
         if ($registered) {
-            RouterService::set_seesion_success("Hi! " . ucwords($user->get_name()) . "Registration completed, now you can continue shopping.");
+            RouterService::set_seesion_success("Hi! " . ucwords($user->get_name()) . " Registration completed, now you can continue shopping.");
             $this->login($user->get_email(), $user_data['password']);
             return;
         }

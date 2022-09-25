@@ -34,8 +34,9 @@ class CategoryService extends EntityService
         return $res;
     }
 
-    public function add_product_to_category(string $product_id, string $category_id): bool{
-        return $this->databaseService->create_record("category_product", ["product_id"=>$product_id, "category_id"=>$category_id]);
+    public function add_product_to_category(string $product_id, string $category_id): bool
+    {
+        return $this->databaseService->create_record("category_product", ["product_id" => $product_id, "category_id" => $category_id]);
     }
 
     public function get_category_by_id(string $id): Category | NULL
@@ -66,6 +67,21 @@ class CategoryService extends EntityService
             array_push($results_arr, $category);
         }
         return $results_arr;
+    }
+
+    public function update_category(string $name, string $category_id): bool
+    {
+        return $this->databaseService->update_record($this->table_name, ['name' => $name], $category_id);
+    }
+
+    public function delete_category(string $category_id): bool
+    {
+        return $this->databaseService->delete_by_id($this->table_name, $category_id);
+    }
+
+    public function is_category_exist(string $id): bool
+    {
+        return $this->databaseService->record_exists($this->table_name, $id);
     }
 
     public function get_category_by_name(string $name): Category | NULL
