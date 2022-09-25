@@ -43,6 +43,8 @@ $routes = [
     ['url' => '/payment-status',      'methods' => ['POST'],    'middlewares'=>['auth'],   'handler' => 'OrderController::handle_payment_status_update'],
     ['url' => '/orders',              'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'OrderController::show_order_details'],
     ['url' => '/order-download',      'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'OrderController::handle_order_product_download'],
+    ['url' => '/admin-orders',        'methods' => ['GET'],     'middlewares'=>['admin'],  'handler' => 'OrderController::show_admin_order_page'],
+    ['url' => '/mark-shipped',        'methods' => ['GET'],     'middlewares'=>['admin'],  'handler' => 'OrderController::handle_mark_order_shipped'],
 
     // User Routes
     ['url' => '/user-account',        'methods' => ['GET'],     'middlewares'=>['auth'],   'handler' => 'UserController::show_user_account'],

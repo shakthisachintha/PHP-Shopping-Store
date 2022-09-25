@@ -104,7 +104,28 @@ class OrderService extends EntityService
         return $orders;
     }
 
-    public function update_payment_status(string $order_id, string $payment_status)
+    public function get_all_orders(): array
+    {
+        $orders = array();
+        $new_order_recs = $this->databaseService->retrieve_by_field($this->table_name, 'status', 'new');
+        $shipped_order_recs = $this->databaseService->retrieve_by_field($this->table_name, 'status', 'shipped');
+        $completed_order_recs = $this->databaseService->retrieve_by_field($this->table_name, 'status', 'completed');
+        foreach ($new_order_recs as $order_rec) {
+            $order = $this->get_order_by_id($order_rec['id']);
+            array_push($orders, $order);
+        }
+        foreach ($shipped_order_recs as $order_rec) {
+            $order = $this->get_order_by_id($order_rec['id']);
+            array_push($orders, $order);
+        }
+        foreach ($completed_order_recs as $order_rec) {
+            $order = $this->get_order_by_id($order_rec['id']);
+            array_push($orders, $order);
+        }
+        return $orders;
+    }
+
+    public function update_payment_status(string $order_id, string $payment_status): EntityOperationResult
     {
         $order = $this->get_order_by_id($order_id);
         $data = ['payment_status' => $payment_status];
@@ -113,6 +134,14 @@ class OrderService extends EntityService
         }
         if ($payment_status === 'complete')
             $success = $this->databaseService->update_record($this->table_name, $data, $order_id);
+        if ($success) return new EntityOperationResult(TRUE, "");
+        else return new EntityOperationResult(FALSE, "");
+    }
+
+    public function update_order_status(string $order_id, string $order_status): EntityOperationResult
+    {
+        $data = ['status' => $order_status];
+        $success = $this->databaseService->update_record($this->table_name, $data, $order_id);
         if ($success) return new EntityOperationResult(TRUE, "");
         else return new EntityOperationResult(FALSE, "");
     }

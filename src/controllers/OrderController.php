@@ -43,6 +43,18 @@ class OrderController extends BaseController
         $this->render('views/pages/order/html_order_index', ["title" => "Order details", "order" => $order]);
     }
 
+    public function show_admin_order_page(array $request)
+    {
+        $orders = $this->OrderService->get_all_orders();
+        $this->render('views/pages/order/html_my_orders', ["title" => "Orders", "orders" => $orders]);
+    }
+
+    public function handle_mark_order_shipped(array $request)
+    {
+        $this->OrderService->update_order_status($request['order_id'], 'shipped');
+        return RouterService::Redirect(build_route_get('orders', ["order_id" => $request['order_id']]));
+    }
+
     public function handle_order_product_download(array $request)
     {
         $product = $this->ProductService->get_product_by_id($request['product_id']);
