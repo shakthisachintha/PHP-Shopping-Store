@@ -13,4 +13,7 @@ This is an online shopping cart(ecommerce) web site written in PHP. Very simple 
 * Shopping cart
 * Order management
 * User account
-<img src='https://github.com/samadpls'/>
+
+<img src="https://i.ibb.co/7gPLgvP/Screenshot-2022-09-25-at-9-42-00-PM-2.png" alt="Screenshot-2022-09-25-at-9-42-00-PM-2" border="0">
+<img src="https://i.ibb.co/hYgszTV/Screenshot-2022-09-25-at-9-43-00-PM-2.png" alt="Screenshot-2022-09-25-at-9-43-00-PM-2" border="0">
+<img src="https://i.ibb.co/X8Th9Qc/Screenshot-2022-09-25-at-9-43-10-PM-2.png" alt="Screenshot-2022-09-25-at-9-43-10-PM-2" border="0">
