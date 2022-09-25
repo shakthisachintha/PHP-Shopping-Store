@@ -49,12 +49,25 @@
                     <?php if ($order->get_type() === OrderType::Delivery) : ?>
                         <tr>
                             <td>Delivery Address</td>
-                            <td class="text-break"><?=$order->get_user()->get_address()?></td>
+                            <td class="text-break"><?= $order->get_user()->get_address() ?></td>
                         </tr>
-                        
                     <?php endif; ?>
                 </tbody>
             </table>
+            <?php if ($authService->is_admin()) : ?>
+                <h5 class="mt-5 mb-3">Admin Functions</h5>
+                <?php if ($order->get_type() === OrderType::Delivery) : ?>
+                    <?php if ($order->get_payment_status() === PaymentStatus::Complete) : ?>
+                        <?php if ($order->get_status() === OrderStatus::Shipped) : ?>
+                            <p>This order is shipped.</p>
+                        <?php else : ?>
+                            <a href="<?= build_route_get('mark-shipped', ['order_id' => $order->get_id()]) ?>" class="btn btn-outline-success">Mark as shipped</a>
+                        <?php endif; ?>
+                    <?php else : ?>
+                        <p class="text-muted">Payment for the order is not completed.</p>
+                    <?php endif; ?>
+                <?php endif; ?>
+            <?php endif; ?>
         </div>
 
         <div class="col-lg-6">

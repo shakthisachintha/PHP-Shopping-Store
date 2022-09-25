@@ -1,7 +1,7 @@
 <div class="p-5 border mt-5 mb-5">
     <div class="row">
         <div class="col">
-            <h2>Sign Up With Past Papers Shop</h2>
+            <h2>Sign Up With <?=SITE_NAME?></h2>
             <p>Create an account or login an existing account to enjoy shopping with us.</p>
             <hr>
         </div>
