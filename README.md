@@ -9,7 +9,7 @@ This is an online shopping cart(ecommerce) web site written in PHP. Very simple 
 * Create, Update products
 * Create, Update, Delete Categories
 * Add, Remove products from categories
-* Online of Delivery orders
+* Online or Delivery orders
 * Download soft coppies of products
 * Mock payment gateway
 * Shopping cart
